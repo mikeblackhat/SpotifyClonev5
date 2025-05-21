@@ -1,7 +1,7 @@
-import Header from "@/components/Header";
+import HomeContent from "@/components/HomeContent";
 
-export default function Home() {
-  return ( 
+export default function Page() {
+  return (
     <div className="
     bg-neutral-900
     rounded-lg
@@ -9,10 +9,9 @@ export default function Home() {
     w-full
     overflow-hidden
     overflow-y-auto
+    custom-scrollbar
     ">
-      <Header>
-        header
-      </Header>
+      <HomeContent />
     </div>
   );
 }

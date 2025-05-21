@@ -1,0 +1,43 @@
+/* Scrollbar effect: only visible on hover/scroll, hidden otherwise */
+
+/* Applies to all scrollable elements with the class 'custom-scrollbar' */
+.custom-scrollbar {
+  scrollbar-width: auto;
+  scrollbar-color: #444 #181818;
+  transition: scrollbar-color 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* Hide scrollbar by default */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+  background: transparent;
+  transition: background 0.5s cubic-bezier(0.4,0,0.2,1);
+} 
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 16px;
+  min-height: 33%; /* 1/3 del alto original */
+  transition: background 0.5s cubic-bezier(0.4,0,0.2,1);
+} 
+
+/* Show scrollbar on hover or while scrolling */
+.custom-scrollbar:hover::-webkit-scrollbar-thumb,
+.custom-scrollbar:active::-webkit-scrollbar-thumb,
+.custom-scrollbar:focus::-webkit-scrollbar-thumb {
+  background: #444;
+  min-height: 33%; /* 1/3 del alto original */
+}
+.custom-scrollbar:hover::-webkit-scrollbar,
+.custom-scrollbar:active::-webkit-scrollbar,
+.custom-scrollbar:focus::-webkit-scrollbar {
+  background: #181818;
+}
+
+/* Firefox: show thumb on hover */
+.custom-scrollbar:hover {
+  scrollbar-color: #444 #181818;
+}
+.custom-scrollbar {
+  scrollbar-color: transparent transparent;
+}
