@@ -1,0 +1,400 @@
+2025-05-22T16:51:41.941124Z  INFO tailwindcss_oxide::scanner: Provided sources:
+2025-05-22T16:51:41.941208Z  INFO tailwindcss_oxide::scanner: Source: PublicSourceEntry { base: "/Users/mikeblackhat/Spotify-clone v0.0.2", pattern: "**/*", negated: false }
+2025-05-22T16:51:41.941265Z  INFO tailwindcss_oxide::scanner: Optimized sources:
+2025-05-22T16:51:41.941270Z  INFO tailwindcss_oxide::scanner: Source: Auto { base: "/Users/mikeblackhat/Spotify-clone v0.0.2" }
+2025-05-22T16:51:41.943019Z  INFO scan_sources: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:41.943441Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/types"
+2025-05-22T16:51:41.943483Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/types/mongodb.d.ts"
+2025-05-22T16:51:41.943500Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/types/next-auth.d.ts"
+2025-05-22T16:51:41.943512Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/types/auth.d.ts"
+2025-05-22T16:51:41.943535Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/tailwind.config.js"
+2025-05-22T16:51:41.943555Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/context"
+2025-05-22T16:51:41.943591Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app"
+2025-05-22T16:51:41.943624Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/auth"
+2025-05-22T16:51:41.943650Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/auth/signup"
+2025-05-22T16:51:41.943671Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/auth/signup/page.tsx"
+2025-05-22T16:51:41.943690Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/auth/signin"
+2025-05-22T16:51:41.943708Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/auth/signin/page.tsx"
+2025-05-22T16:51:41.943729Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/(site)"
+2025-05-22T16:51:41.943750Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/(site)/page.tsx"
+2025-05-22T16:51:41.943768Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/profile"
+2025-05-22T16:51:41.943790Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/profile/page.tsx"
+2025-05-22T16:51:41.943805Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/layout.tsx"
+2025-05-22T16:51:41.943819Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/scrollbar.css"
+2025-05-22T16:51:41.943835Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api"
+2025-05-22T16:51:41.943858Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api/auth"
+2025-05-22T16:51:41.943884Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api/auth/register"
+2025-05-22T16:51:41.943903Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api/auth/register/route.ts"
+2025-05-22T16:51:41.943922Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api/auth/[...nextauth]"
+2025-05-22T16:51:41.943940Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api/auth/[...nextauth]/route.ts"
+2025-05-22T16:51:41.943974Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/account"
+2025-05-22T16:51:41.943991Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/account/page.tsx"
+2025-05-22T16:51:41.944006Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/(auth)"
+2025-05-22T16:51:41.944024Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/(auth)/layout.tsx"
+2025-05-22T16:51:41.944038Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/globals.css"
+2025-05-22T16:51:41.944047Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/providers.tsx"
+2025-05-22T16:51:41.944057Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/auth.config.ts"
+2025-05-22T16:51:41.944071Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/config"
+2025-05-22T16:51:41.944093Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/postcss.config.mjs"
+2025-05-22T16:51:41.944123Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/env.d.ts"
+2025-05-22T16:51:41.944138Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/models"
+2025-05-22T16:51:41.944182Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/README.md"
+2025-05-22T16:51:41.944198Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/components"
+2025-05-22T16:51:41.944225Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/components/ui"
+2025-05-22T16:51:41.944244Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/components/UserProfile.tsx"
+2025-05-22T16:51:41.944254Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/components/Topbar.tsx"
+2025-05-22T16:51:41.944266Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/components/Library.tsx"
+2025-05-22T16:51:41.944279Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/components/HomeContent.tsx"
+2025-05-22T16:51:41.944291Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/components/Sidebar.tsx"
+2025-05-22T16:51:41.944304Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/components/Box.tsx"
+2025-05-22T16:51:41.944316Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/components/SidebarItem.tsx"
+2025-05-22T16:51:41.944328Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/components/Rightbar.tsx"
+2025-05-22T16:51:41.944341Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/components/FooterPlayer.tsx"
+2025-05-22T16:51:41.944358Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/public"
+2025-05-22T16:51:41.944381Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/public/songs"
+2025-05-22T16:51:41.944402Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/public/file.svg"
+2025-05-22T16:51:41.944415Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/public/vercel.svg"
+2025-05-22T16:51:41.944425Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/public/next.svg"
+2025-05-22T16:51:41.944440Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/public/globe.svg"
+2025-05-22T16:51:41.944451Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/public/window.svg"
+2025-05-22T16:51:41.944474Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/package.json"
+2025-05-22T16:51:41.944490Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/hooks"
+2025-05-22T16:51:41.944510Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/hooks/useUser.ts"
+2025-05-22T16:51:41.944527Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/scripts"
+2025-05-22T16:51:41.944544Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/scripts/testLogin.js"
+2025-05-22T16:51:41.944553Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/scripts/registerUser.js"
+2025-05-22T16:51:41.944572Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/lib"
+2025-05-22T16:51:41.944589Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/lib/mongodb.ts"
+2025-05-22T16:51:41.944597Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/lib/auth.ts"
+2025-05-22T16:51:41.944611Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/tsconfig.json"
+2025-05-22T16:51:41.944641Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/.vscode"
+2025-05-22T16:51:41.944661Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/.vscode/settings.json"
+2025-05-22T16:51:41.944678Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/pages"
+2025-05-22T16:51:41.944697Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/eslint.config.mjs"
+2025-05-22T16:51:41.944706Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/auth.ts"
+2025-05-22T16:51:41.944717Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/next.config.ts"
+2025-05-22T16:51:41.944752Z  INFO scan_sources: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:41.944756Z  INFO extract_candidates: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:41.944759Z  INFO extract_candidates:read_all_files: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:41.944761Z  INFO extract_candidates:read_all_files: tailwindcss_oxide::scanner: Reading 43 file(s)
+2025-05-22T16:51:41.944972Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/package.json"
+2025-05-22T16:51:41.945041Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/hooks/useUser.ts"
+2025-05-22T16:51:41.945088Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/tsconfig.json"
+2025-05-22T16:51:41.945126Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api/auth/[...nextauth]/route.ts"
+2025-05-22T16:51:41.945128Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/.vscode/settings.json"
+2025-05-22T16:51:41.945127Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/app/auth/signin/page.tsx"
+2025-05-22T16:51:41.945171Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/scripts/testLogin.js"
+2025-05-22T16:51:41.945134Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/eslint.config.mjs"
+2025-05-22T16:51:41.945199Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/app/(site)/page.tsx"
+2025-05-22T16:51:41.945215Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/scripts/registerUser.js"
+2025-05-22T16:51:41.945227Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/types/next-auth.d.ts"
+2025-05-22T16:51:41.945254Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/lib/mongodb.ts"
+2025-05-22T16:51:41.945265Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/types/mongodb.d.ts"
+2025-05-22T16:51:41.945278Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/app/auth/signup/page.tsx"
+2025-05-22T16:51:41.945283Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/app/account/page.tsx"
+2025-05-22T16:51:41.945287Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/components/HomeContent.tsx"
+2025-05-22T16:51:41.945303Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/public/next.svg"
+2025-05-22T16:51:41.945297Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/lib/auth.ts"
+2025-05-22T16:51:41.945303Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/public/file.svg"
+2025-05-22T16:51:41.945286Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/types/auth.d.ts"
+2025-05-22T16:51:41.945341Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/auth.ts"
+2025-05-22T16:51:41.945342Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/public/globe.svg"
+2025-05-22T16:51:41.945406Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/public/window.svg"
+2025-05-22T16:51:41.945412Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/next.config.ts"
+2025-05-22T16:51:41.945351Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/public/vercel.svg"
+2025-05-22T16:51:41.945434Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/components/Box.tsx"
+2025-05-22T16:51:41.945364Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/components/FooterPlayer.tsx"
+2025-05-22T16:51:41.945344Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/app/profile/page.tsx"
+2025-05-22T16:51:41.945470Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/components/Sidebar.tsx"
+2025-05-22T16:51:41.945419Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/app/(auth)/layout.tsx"
+2025-05-22T16:51:41.945351Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/postcss.config.mjs"
+2025-05-22T16:51:41.945466Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/components/SidebarItem.tsx"
+2025-05-22T16:51:41.945305Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/tailwind.config.js"
+2025-05-22T16:51:41.945478Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/app/layout.tsx"
+2025-05-22T16:51:41.945495Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/README.md"
+2025-05-22T16:51:41.945524Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/components/Library.tsx"
+2025-05-22T16:51:41.945566Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/env.d.ts"
+2025-05-22T16:51:41.945554Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/app/providers.tsx"
+2025-05-22T16:51:41.945552Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/components/UserProfile.tsx"
+2025-05-22T16:51:41.945540Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/auth.config.ts"
+2025-05-22T16:51:41.945615Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/components/Topbar.tsx"
+2025-05-22T16:51:41.945631Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/components/Rightbar.tsx"
+2025-05-22T16:51:41.945622Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api/auth/register/route.ts"
+2025-05-22T16:51:41.945896Z  INFO extract_candidates:read_all_files: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:41.945908Z  INFO extract_candidates:parse_all_blobs: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:41.945912Z  INFO extract_candidates:parse_all_blobs:extract: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:41.946540Z  INFO extract_candidates:parse_all_blobs:extract: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:41.946558Z  INFO extract_candidates:parse_all_blobs: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:41.946562Z  INFO extract_candidates:read_all_files: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:41.946565Z  INFO extract_candidates:read_all_files: tailwindcss_oxide::scanner: Reading 2 file(s)
+2025-05-22T16:51:41.946597Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/app/scrollbar.css"
+2025-05-22T16:51:41.946598Z  INFO tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/app/globals.css"
+2025-05-22T16:51:41.946623Z  INFO extract_candidates:read_all_files: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:41.946633Z  INFO extract_candidates:extract_css_variables: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:41.946636Z  INFO extract_candidates:extract_css_variables:extract: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:41.946733Z  INFO extract_candidates:extract_css_variables:extract: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:41.946744Z  INFO extract_candidates:extract_css_variables: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:41.947110Z  INFO extract_candidates: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:41.947479Z  INFO get_files: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:41.947486Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:41.947854Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/types"
+2025-05-22T16:51:41.947946Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/context"
+2025-05-22T16:51:41.947987Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app"
+2025-05-22T16:51:41.948018Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/auth"
+2025-05-22T16:51:41.948042Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/auth/signup"
+2025-05-22T16:51:41.948073Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/auth/signin"
+2025-05-22T16:51:41.948104Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/(site)"
+2025-05-22T16:51:41.948135Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/profile"
+2025-05-22T16:51:41.948185Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api"
+2025-05-22T16:51:41.948210Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api/auth"
+2025-05-22T16:51:41.948233Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api/auth/register"
+2025-05-22T16:51:41.948267Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api/auth/[...nextauth]"
+2025-05-22T16:51:41.948313Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/account"
+2025-05-22T16:51:41.948340Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/(auth)"
+2025-05-22T16:51:41.948383Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/config"
+2025-05-22T16:51:41.948438Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/models"
+2025-05-22T16:51:41.948485Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/components"
+2025-05-22T16:51:41.948511Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/components/ui"
+2025-05-22T16:51:41.948598Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/public"
+2025-05-22T16:51:41.948621Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/public/songs"
+2025-05-22T16:51:41.948696Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/hooks"
+2025-05-22T16:51:41.948727Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/scripts"
+2025-05-22T16:51:41.948762Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/lib"
+2025-05-22T16:51:41.948819Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/.vscode"
+2025-05-22T16:51:41.948851Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/pages"
+2025-05-22T16:51:41.948912Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:41.949029Z  INFO get_files: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:41.949117Z  INFO get_globs: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:41.949120Z  INFO get_globs:scan_sources: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:41.949397Z  INFO get_globs:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/types"
+2025-05-22T16:51:41.949460Z  INFO get_globs:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/context"
+2025-05-22T16:51:41.949494Z  INFO get_globs:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app"
+2025-05-22T16:51:41.949522Z  INFO get_globs:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/auth"
+2025-05-22T16:51:41.949545Z  INFO get_globs:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/auth/signup"
+2025-05-22T16:51:41.949572Z  INFO get_globs:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/auth/signin"
+2025-05-22T16:51:41.949602Z  INFO get_globs:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/(site)"
+2025-05-22T16:51:41.949631Z  INFO get_globs:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/profile"
+2025-05-22T16:51:41.949671Z  INFO get_globs:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api"
+2025-05-22T16:51:41.949692Z  INFO get_globs:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api/auth"
+2025-05-22T16:51:41.949715Z  INFO get_globs:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api/auth/register"
+2025-05-22T16:51:41.949750Z  INFO get_globs:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api/auth/[...nextauth]"
+2025-05-22T16:51:41.949780Z  INFO get_globs:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/account"
+2025-05-22T16:51:41.949807Z  INFO get_globs:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/(auth)"
+2025-05-22T16:51:41.949847Z  INFO get_globs:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/config"
+2025-05-22T16:51:41.949899Z  INFO get_globs:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/models"
+2025-05-22T16:51:41.949944Z  INFO get_globs:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/components"
+2025-05-22T16:51:41.949969Z  INFO get_globs:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/components/ui"
+2025-05-22T16:51:41.950043Z  INFO get_globs:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/public"
+2025-05-22T16:51:41.950065Z  INFO get_globs:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/public/songs"
+2025-05-22T16:51:41.950131Z  INFO get_globs:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/hooks"
+2025-05-22T16:51:41.950159Z  INFO get_globs:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/scripts"
+2025-05-22T16:51:41.950193Z  INFO get_globs:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/lib"
+2025-05-22T16:51:41.950242Z  INFO get_globs:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/.vscode"
+2025-05-22T16:51:41.950271Z  INFO get_globs:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/pages"
+2025-05-22T16:51:41.950324Z  INFO get_globs:scan_sources: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:41.951931Z  INFO get_globs: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:45.983092Z  INFO scan_sources: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:45.983601Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/types"
+2025-05-22T16:51:45.983704Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/context"
+2025-05-22T16:51:45.983794Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app"
+2025-05-22T16:51:45.983843Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/auth"
+2025-05-22T16:51:45.983873Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/auth/signup"
+2025-05-22T16:51:45.983913Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/auth/signin"
+2025-05-22T16:51:45.983949Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/(site)"
+2025-05-22T16:51:45.983986Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/profile"
+2025-05-22T16:51:45.984039Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api"
+2025-05-22T16:51:45.984064Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api/auth"
+2025-05-22T16:51:45.984091Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api/auth/register"
+2025-05-22T16:51:45.984128Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api/auth/[...nextauth]"
+2025-05-22T16:51:45.984175Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/account"
+2025-05-22T16:51:45.984206Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/(auth)"
+2025-05-22T16:51:45.984265Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/config"
+2025-05-22T16:51:45.984338Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/models"
+2025-05-22T16:51:45.984404Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/components"
+2025-05-22T16:51:45.984440Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/components/ui"
+2025-05-22T16:51:45.984541Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/public"
+2025-05-22T16:51:45.984573Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/public/songs"
+2025-05-22T16:51:45.984659Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/hooks"
+2025-05-22T16:51:45.984700Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/scripts"
+2025-05-22T16:51:45.984739Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/lib"
+2025-05-22T16:51:45.984810Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/.vscode"
+2025-05-22T16:51:45.984845Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/pages"
+2025-05-22T16:51:45.984914Z  INFO scan_sources: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:45.984919Z  INFO extract_candidates: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:45.984922Z  INFO extract_candidates:read_all_files: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:45.984925Z  INFO extract_candidates:read_all_files: tailwindcss_oxide::scanner: Reading 0 file(s)
+2025-05-22T16:51:45.984928Z  INFO extract_candidates:read_all_files: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:45.984931Z  INFO extract_candidates:parse_all_blobs: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:45.984934Z  INFO extract_candidates:parse_all_blobs:extract: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:45.984937Z  INFO extract_candidates:parse_all_blobs:extract: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:45.984940Z  INFO extract_candidates:parse_all_blobs: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:45.984944Z  INFO extract_candidates: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:45.985361Z  INFO get_files: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:45.985373Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:45.985871Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/types"
+2025-05-22T16:51:45.985957Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/context"
+2025-05-22T16:51:45.985991Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app"
+2025-05-22T16:51:45.986022Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/auth"
+2025-05-22T16:51:45.986047Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/auth/signup"
+2025-05-22T16:51:45.986080Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/auth/signin"
+2025-05-22T16:51:45.986112Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/(site)"
+2025-05-22T16:51:45.986144Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/profile"
+2025-05-22T16:51:45.986208Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api"
+2025-05-22T16:51:45.986230Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api/auth"
+2025-05-22T16:51:45.986255Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api/auth/register"
+2025-05-22T16:51:45.986288Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api/auth/[...nextauth]"
+2025-05-22T16:51:45.986320Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/account"
+2025-05-22T16:51:45.986349Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/(auth)"
+2025-05-22T16:51:45.986403Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/config"
+2025-05-22T16:51:45.986463Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/models"
+2025-05-22T16:51:45.986517Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/components"
+2025-05-22T16:51:45.986545Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/components/ui"
+2025-05-22T16:51:45.986640Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/public"
+2025-05-22T16:51:45.986664Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/public/songs"
+2025-05-22T16:51:45.986740Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/hooks"
+2025-05-22T16:51:45.986773Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/scripts"
+2025-05-22T16:51:45.986810Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/lib"
+2025-05-22T16:51:45.986866Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/.vscode"
+2025-05-22T16:51:45.986902Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/pages"
+2025-05-22T16:51:45.986963Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:45.987131Z  INFO get_files: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:45.987227Z  INFO get_globs: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:45.987232Z  INFO get_globs: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:48.172674Z  INFO scan_sources: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:48.173235Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/types"
+2025-05-22T16:51:48.173348Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/context"
+2025-05-22T16:51:48.173389Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app"
+2025-05-22T16:51:48.173425Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/auth"
+2025-05-22T16:51:48.173452Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/auth/signup"
+2025-05-22T16:51:48.173487Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/auth/signin"
+2025-05-22T16:51:48.173521Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/(site)"
+2025-05-22T16:51:48.173556Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/profile"
+2025-05-22T16:51:48.173620Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api"
+2025-05-22T16:51:48.173644Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api/auth"
+2025-05-22T16:51:48.173670Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api/auth/register"
+2025-05-22T16:51:48.173705Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api/auth/[...nextauth]"
+2025-05-22T16:51:48.173739Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/account"
+2025-05-22T16:51:48.173769Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/(auth)"
+2025-05-22T16:51:48.173808Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/auth.config.ts"
+2025-05-22T16:51:48.173825Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/config"
+2025-05-22T16:51:48.173887Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/models"
+2025-05-22T16:51:48.173939Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/components"
+2025-05-22T16:51:48.173968Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/components/ui"
+2025-05-22T16:51:48.174059Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/public"
+2025-05-22T16:51:48.174083Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/public/songs"
+2025-05-22T16:51:48.174160Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/hooks"
+2025-05-22T16:51:48.174194Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/scripts"
+2025-05-22T16:51:48.174233Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/lib"
+2025-05-22T16:51:48.174290Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/.vscode"
+2025-05-22T16:51:48.174325Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/pages"
+2025-05-22T16:51:48.174388Z  INFO scan_sources: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:48.174394Z  INFO extract_candidates: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:48.174397Z  INFO extract_candidates:read_all_files: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:48.174400Z  INFO extract_candidates:read_all_files: tailwindcss_oxide::scanner: Reading 1 file(s)
+2025-05-22T16:51:48.174417Z  INFO extract_candidates:read_all_files: tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/auth.config.ts"
+2025-05-22T16:51:48.174422Z  INFO extract_candidates:read_all_files: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:48.174425Z  INFO extract_candidates:parse_all_blobs: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:48.174428Z  INFO extract_candidates:parse_all_blobs:extract: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:48.174653Z  INFO extract_candidates:parse_all_blobs:extract: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:48.174678Z  INFO extract_candidates:parse_all_blobs: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:48.174827Z  INFO extract_candidates: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:48.175189Z  INFO get_files: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:48.175213Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:48.175827Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/types"
+2025-05-22T16:51:48.175956Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/context"
+2025-05-22T16:51:48.175997Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app"
+2025-05-22T16:51:48.176032Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/auth"
+2025-05-22T16:51:48.176059Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/auth/signup"
+2025-05-22T16:51:48.176096Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/auth/signin"
+2025-05-22T16:51:48.176129Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/(site)"
+2025-05-22T16:51:48.176165Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/profile"
+2025-05-22T16:51:48.176292Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api"
+2025-05-22T16:51:48.176319Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api/auth"
+2025-05-22T16:51:48.176345Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api/auth/register"
+2025-05-22T16:51:48.176381Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api/auth/[...nextauth]"
+2025-05-22T16:51:48.176416Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/account"
+2025-05-22T16:51:48.176448Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/(auth)"
+2025-05-22T16:51:48.176501Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/config"
+2025-05-22T16:51:48.176561Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/models"
+2025-05-22T16:51:48.176613Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/components"
+2025-05-22T16:51:48.176642Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/components/ui"
+2025-05-22T16:51:48.176740Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/public"
+2025-05-22T16:51:48.176764Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/public/songs"
+2025-05-22T16:51:48.176840Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/hooks"
+2025-05-22T16:51:48.176871Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/scripts"
+2025-05-22T16:51:48.176909Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/lib"
+2025-05-22T16:51:48.176966Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/.vscode"
+2025-05-22T16:51:48.177002Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/pages"
+2025-05-22T16:51:48.177069Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:48.177299Z  INFO get_files: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:48.177464Z  INFO get_globs: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:48.177477Z  INFO get_globs: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:56.611452Z  INFO scan_sources: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:56.611933Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/types"
+2025-05-22T16:51:56.612026Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/context"
+2025-05-22T16:51:56.612065Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app"
+2025-05-22T16:51:56.612099Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/auth"
+2025-05-22T16:51:56.612128Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/auth/signup"
+2025-05-22T16:51:56.612179Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/auth/signin"
+2025-05-22T16:51:56.612213Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/(site)"
+2025-05-22T16:51:56.612246Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/profile"
+2025-05-22T16:51:56.612293Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api"
+2025-05-22T16:51:56.612317Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api/auth"
+2025-05-22T16:51:56.612342Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api/auth/register"
+2025-05-22T16:51:56.612376Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api/auth/[...nextauth]"
+2025-05-22T16:51:56.612410Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/account"
+2025-05-22T16:51:56.612439Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/(auth)"
+2025-05-22T16:51:56.612476Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/auth.config.ts"
+2025-05-22T16:51:56.612492Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/config"
+2025-05-22T16:51:56.612556Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/models"
+2025-05-22T16:51:56.612616Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/components"
+2025-05-22T16:51:56.612645Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/components/ui"
+2025-05-22T16:51:56.612734Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/public"
+2025-05-22T16:51:56.612758Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/public/songs"
+2025-05-22T16:51:56.612835Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/hooks"
+2025-05-22T16:51:56.612867Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/scripts"
+2025-05-22T16:51:56.612905Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/lib"
+2025-05-22T16:51:56.612960Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/.vscode"
+2025-05-22T16:51:56.612994Z  INFO scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/pages"
+2025-05-22T16:51:56.613057Z  INFO scan_sources: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:56.613062Z  INFO extract_candidates: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:56.613065Z  INFO extract_candidates:read_all_files: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:56.613067Z  INFO extract_candidates:read_all_files: tailwindcss_oxide::scanner: Reading 1 file(s)
+2025-05-22T16:51:56.613095Z  INFO extract_candidates:read_all_files: tailwindcss_oxide::scanner: Reading "/Users/mikeblackhat/Spotify-clone v0.0.2/auth.config.ts"
+2025-05-22T16:51:56.613100Z  INFO extract_candidates:read_all_files: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:56.613103Z  INFO extract_candidates:parse_all_blobs: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:56.613106Z  INFO extract_candidates:parse_all_blobs:extract: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:56.613300Z  INFO extract_candidates:parse_all_blobs:extract: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:56.613329Z  INFO extract_candidates:parse_all_blobs: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:56.613584Z  INFO extract_candidates: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:56.613907Z  INFO get_files: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:56.613913Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:56.614332Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/types"
+2025-05-22T16:51:56.614481Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/context"
+2025-05-22T16:51:56.614552Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app"
+2025-05-22T16:51:56.614601Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/auth"
+2025-05-22T16:51:56.614635Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/auth/signup"
+2025-05-22T16:51:56.614696Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/auth/signin"
+2025-05-22T16:51:56.614747Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/(site)"
+2025-05-22T16:51:56.614783Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/profile"
+2025-05-22T16:51:56.614835Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api"
+2025-05-22T16:51:56.614915Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api/auth"
+2025-05-22T16:51:56.614971Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api/auth/register"
+2025-05-22T16:51:56.615020Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/api/auth/[...nextauth]"
+2025-05-22T16:51:56.615064Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/account"
+2025-05-22T16:51:56.615097Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/app/(auth)"
+2025-05-22T16:51:56.615152Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/config"
+2025-05-22T16:51:56.615218Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/models"
+2025-05-22T16:51:56.615269Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/components"
+2025-05-22T16:51:56.615299Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/components/ui"
+2025-05-22T16:51:56.615416Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/public"
+2025-05-22T16:51:56.615446Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/public/songs"
+2025-05-22T16:51:56.615525Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/hooks"
+2025-05-22T16:51:56.615650Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/scripts"
+2025-05-22T16:51:56.616139Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/lib"
+2025-05-22T16:51:56.616381Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/.vscode"
+2025-05-22T16:51:56.616564Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: Discovering "/Users/mikeblackhat/Spotify-clone v0.0.2/pages"
+2025-05-22T16:51:56.616839Z  INFO get_files:scan_sources: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:56.617319Z  INFO get_files: tailwindcss_oxide::scanner: exit
+2025-05-22T16:51:56.617452Z  INFO get_globs: tailwindcss_oxide::scanner: enter
+2025-05-22T16:51:56.617461Z  INFO get_globs: tailwindcss_oxide::scanner: exit

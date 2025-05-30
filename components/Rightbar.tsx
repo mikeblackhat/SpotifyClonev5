@@ -2,7 +2,7 @@ import React from "react";
 
 const Rightbar: React.FC = () => {
   return (
-    <aside className="max-w-[340px] w-full h-full min-h-0 bg-black/70 backdrop-blur-md border-l border-neutral-800 px-4 py-6 xl:flex hidden flex-col overflow-y-auto custom-scrollbar pt-1 md:pt-1.5">
+    <aside className="max-w-[340px] w-full h-full min-h-0 bg-black/60 backdrop-blur-xl border-l border-neutral-700 shadow-2xl px-4 py-6 xl:flex hidden flex-col overflow-y-auto custom-scrollbar pt-1 md:pt-1.5">
       <div className="flex-1 min-h-0 flex flex-col">
 
       {/* Portada y datos principales */}
