@@ -4,7 +4,8 @@ import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
-import { FaFacebook, FaApple, FaEnvelope, FaLock, FaUser } from 'react-icons/fa';
+import { FaFacebook, FaApple, FaEnvelope, FaLock, FaUser, FaCheckCircle } from 'react-icons/fa';
+import { Modal } from '@/components/ui/Modal';
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -96,11 +97,14 @@ export default function SignUpPage() {
         return;
       }
       
-      // Registro exitoso, redirigir a la página de inicio de sesión
+      // Mostrar modal de éxito
       setSuccess(true);
+      
+      // Redirigir después de 3 segundos
       setTimeout(() => {
+        setSuccess(false);
         router.push('/auth/signin');
-      }, 2000);
+      }, 3000);
       
     } catch (error: any) {
       console.error('Error en el registro:', error);
@@ -281,7 +285,40 @@ export default function SignUpPage() {
                 </div>
               </div>
             </form>
-            
+      
+      {/* Modal de éxito */}
+      <Modal 
+        isOpen={success} 
+        onClose={() => {
+          setSuccess(false);
+          router.push('/auth/signin');
+        }}
+        closeOnClickOutside={false}
+      >
+        <div className="text-center p-6">
+          <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-4">
+            <FaCheckCircle className="h-10 w-10 text-green-600" />
+          </div>
+          <h3 className="text-xl font-bold text-white mb-2">¡Registro exitoso!</h3>
+          <p className="text-gray-300 mb-6">Tu cuenta ha sido creada correctamente. Serás redirigido para iniciar sesión.</p>
+          <div className="mt-6">
+            <div className="flex justify-center">
+              <button
+                type="button"
+                onClick={() => {
+                  setSuccess(false);
+                  router.push('/auth/signin');
+                }}
+                className="px-6 py-2.5 bg-green-600 text-white font-medium rounded-full hover:bg-green-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+              >
+                Ir a Iniciar Sesión
+              </button>
+            </div>
+            <p className="text-xs text-gray-500 mt-3">Redirigiendo en 3 segundos...</p>
+          </div>
+        </div>
+      </Modal>
+      
             <div className="text-center text-neutral-400 text-sm mt-6">
               ¿Ya tienes una cuenta?{' '}
               <button 

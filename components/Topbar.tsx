@@ -176,12 +176,6 @@ const Topbar = () => {
       {/* Logo Spotify */}
       <div className="flex items-center gap-4 sm:gap-8">
         <BsSpotify className="text-white text-2xl flex-shrink-0" />
-        <Link 
-          href="/premium" 
-          className="text-white font-medium hover:text-green-500 transition-colors hidden sm:block"
-        >
-          Premium
-        </Link>
       </div>
       {/* Buscador centrado */}
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg px-2 sm:px-0">

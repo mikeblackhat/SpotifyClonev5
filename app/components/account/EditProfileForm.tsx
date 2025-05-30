@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { FaArrowLeft, FaUser, FaEnvelope, FaCalendarAlt, FaVenusMars, FaGlobe } from 'react-icons/fa';
+import { FaArrowLeft, FaUser, FaEnvelope, FaCalendarAlt, FaVenusMars, FaGlobe, FaCheckCircle } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
+import { Modal } from '@/components/ui/Modal';
 
 interface UserProfile {
   _id: string;
@@ -20,7 +21,7 @@ export default function EditProfileForm() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
-  const [saveSuccess, setSaveSuccess] = useState(false);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [profile, setProfile] = useState<Partial<UserProfile>>({
     name: '',
     username: '',
@@ -136,13 +137,14 @@ export default function EditProfileForm() {
           new Date(updatedProfile.birthDate).toISOString().split('T')[0] : ''
       }));
       
-      setSaveSuccess(true);
-      toast.success('Perfil actualizado correctamente');
+      // Mostrar el modal de éxito
+      setIsSuccessModalOpen(true);
       
-      // Redirigir después de 1.5 segundos
+      // Redirigir después de 3 segundos
       setTimeout(() => {
+        setIsSuccessModalOpen(false);
         router.push('/account');
-      }, 1500);
+      }, 3000);
       
     } catch (error) {
       console.error('Error al guardar el perfil:', error);
@@ -155,7 +157,10 @@ export default function EditProfileForm() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500"></div>
+        <div className="flex flex-col items-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500 mb-4"></div>
+          <p className="text-gray-400">Cargando perfil...</p>
+        </div>
       </div>
     );
   }
@@ -174,7 +179,17 @@ export default function EditProfileForm() {
         </button>
       </div>
 
-      <form onSubmit={handleSubmit} className="w-full">
+
+      
+      <form onSubmit={handleSubmit} className="w-full relative">
+        {isSaving && (
+          <div className="absolute inset-0 bg-black/50 rounded-2xl flex items-center justify-center z-10">
+            <div className="flex flex-col items-center">
+              <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-green-500 mb-2"></div>
+              <p className="text-gray-300 text-sm">Guardando cambios...</p>
+            </div>
+          </div>
+        )}
         <div className="flex flex-col lg:flex-row gap-6 bg-gray-900/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-800/50 shadow-xl">
           {/* Columna izquierda - Foto de perfil */}
           <div className="w-full lg:w-1/3 flex-shrink-0 flex flex-col items-center px-6 py-8">
@@ -394,6 +409,39 @@ export default function EditProfileForm() {
           </button>
         </div>
       </form>
+
+      {/* Modal de éxito */}
+      <Modal 
+        isOpen={isSuccessModalOpen} 
+        onClose={() => {
+          setIsSuccessModalOpen(false);
+          router.push('/account');
+        }}
+        closeOnClickOutside={false}
+      >
+        <div className="text-center p-6">
+          <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-4">
+            <FaCheckCircle className="h-10 w-10 text-green-600" />
+          </div>
+          <h3 className="text-xl font-bold text-white mb-2">¡Perfil actualizado!</h3>
+          <p className="text-gray-300 mb-6">Tus cambios se han guardado correctamente.</p>
+          <div className="mt-6">
+            <div className="flex justify-center">
+              <button
+                type="button"
+                onClick={() => {
+                  setIsSuccessModalOpen(false);
+                  router.push('/account');
+                }}
+                className="px-6 py-2.5 bg-green-600 text-white font-medium rounded-full hover:bg-green-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+              >
+                ¡Entendido!
+              </button>
+            </div>
+            <p className="text-xs text-gray-500 mt-3">Redirigiendo en 3 segundos...</p>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }

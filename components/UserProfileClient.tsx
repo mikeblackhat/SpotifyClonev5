@@ -1,23 +1,53 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
-import { FiUser, FiHeart, FiClock, FiPlus, FiMusic } from 'react-icons/fi';
-import { BsMusicNoteList, BsSpotify, BsGraphUp } from 'react-icons/bs';
-import { FaPlay, FaMicrophone } from 'react-icons/fa';
+import { FiUser, FiHeart, FiPlus } from 'react-icons/fi';
+import { FaPlay } from 'react-icons/fa';
+import { useRouter } from 'next/navigation';
+
+interface TopTrack {
+  id: number;
+  title: string;
+  artist: string;
+  duration: string;
+  plays: number;
+}
+
+interface Artist {
+  id: number;
+  name: string;
+  plays: number;
+  image: string;
+}
+
+interface UserData {
+  name: string;
+  email: string;
+  followers: number;
+  following: number;
+  playlists: number;
+  topGenres: string[];
+  topArtists: Artist[];
+}
 
 const UserProfileClient = () => {
-  const { data: session, status } = useSession();
+  const router = useRouter();
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      router.push('/login');
+    },
+  });
   
   if (status === 'loading') {
     return (
-      <div className="flex items-center justify-center h-64">
+      <div className="flex items-center justify-center h-screen">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500"></div>
       </div>
     );
   }
 
-  // Función para formatear el nombre con la primera letra en mayúscula
-  const formatName = (name: string | null | undefined) => {
+  const formatName = (name: string | null | undefined): string => {
     if (!name) return 'Usuario';
     return name
       .toLowerCase()
@@ -27,9 +57,9 @@ const UserProfileClient = () => {
   };
 
   // Datos del usuario autenticado
-  const user = {
-    name: formatName(session?.user?.name),
-    email: session?.user?.email || '',
+  const user: UserData = {
+    name: formatName(session?.user?.name || null),
+    email: session?.user?.email || 'usuario@ejemplo.com',
     followers: 1245,
     following: 42,
     playlists: 12,
@@ -43,7 +73,7 @@ const UserProfileClient = () => {
     ]
   };
 
-  const topTracks = [
+  const topTracks: TopTrack[] = [
     { id: 1, title: 'Canción Favorita 1', artist: 'Artista 1', duration: '3:45', plays: 1245 },
     { id: 2, title: 'Canción Favorita 2', artist: 'Artista 2', duration: '3:20', plays: 1103 },
     { id: 3, title: 'Canción Favorita 3', artist: 'Artista 3', duration: '4:12', plays: 987 },

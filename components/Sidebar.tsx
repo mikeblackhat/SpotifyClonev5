@@ -166,56 +166,6 @@ const Sidebar: React.FC = () => {
                             </button>
                         </div>
                     )}
-                    {/* Navigation */}
-                    <div className={`px-4 ${isCollapsed ? 'flex flex-col items-center' : ''}`}>
-                        <nav className="space-y-1">
-                            <Link href="/">
-                                <NavItem 
-                                    icon={<BiHomeAlt />} 
-                                    text="Inicio" 
-                                    isActive={pathname === '/'} 
-                                    collapsed={isCollapsed} 
-                                />
-                            </Link>
-                            <Link href="/search">
-                                <NavItem 
-                                    icon={<BiSearchAlt2 />} 
-                                    text="Buscar" 
-                                    isActive={pathname === '/search'} 
-                                    collapsed={isCollapsed} 
-                                />
-                            </Link>
-                            {isAuthenticated ? (
-                                <Link href="/collection">
-                                    <NavItem 
-                                        icon={<RiPlayListFill />} 
-                                        text="Tu biblioteca" 
-                                        isActive={pathname.startsWith('/collection')} 
-                                        collapsed={isCollapsed} 
-                                    />
-                                </Link>
-                            ) : (
-                                <>
-                                    <Link href="/auth/signin">
-                                        <NavItem 
-                                            icon={<BiLogIn />} 
-                                            text="Iniciar sesión" 
-                                            isActive={pathname === '/auth/signin'} 
-                                            collapsed={isCollapsed} 
-                                        />
-                                    </Link>
-                                    <Link href="/auth/signup">
-                                        <NavItem 
-                                            icon={<BiUserPlus />} 
-                                            text="Registrarse" 
-                                            isActive={pathname === '/auth/signup'} 
-                                            collapsed={isCollapsed} 
-                                        />
-                                    </Link>
-                                </>
-                            )}
-                        </nav>
-                    </div>
 
                     {/* Playlist Section - Only show when authenticated */}
                     {!isCollapsed && isAuthenticated && (
