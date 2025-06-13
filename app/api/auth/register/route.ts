@@ -15,8 +15,10 @@ interface UserDocument {
   email: string;
   password: string;
   name?: string;
+  username: string;
   emailVerified: Date;
   image: string | null;
+  plan: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -158,15 +160,21 @@ export async function POST(request: Request) {
     }
 
     // Crear nombre de usuario a partir del email (antes del @) si es necesario
-    const usernameFromEmail = email.split('@')[0].toLowerCase();
+    const usernameFromEmail = username || email.split('@')[0].toLowerCase();
 
     const newUser = {
       email: email.toLowerCase().trim(),
-      username: usernameFromEmail, // Para satisfacer el índice único
+      username: usernameFromEmail,
       password: hashedPassword,
-      name: name?.trim() || usernameFromEmail, // Usar el nombre o el username como nombre
+      name: name?.trim() || usernameFromEmail,
       emailVerified: new Date(),
       image: null,
+      plan: 'free',
+      provider: 'credentials',
+      role: 'user',
+      isActive: true,
+      lastLogin: new Date(),
+      preferences: {},
       createdAt: new Date(),
       updatedAt: new Date(),
     } as UserDocument;

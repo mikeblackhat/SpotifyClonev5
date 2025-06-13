@@ -1,34 +1,18 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
-import { FiUser, FiHeart, FiPlus } from 'react-icons/fi';
-import { FaPlay } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
+import { FiMusic } from 'react-icons/fi';
+import { FaPlay, FaMicrophone } from 'react-icons/fa';
+import { BsGraphUp } from 'react-icons/bs';
 
-interface TopTrack {
-  id: number;
-  title: string;
-  artist: string;
-  duration: string;
-  plays: number;
-}
+// Components
+import ProfileHeader from './profile/ProfileHeader';
+import PlaylistsSection from './profile/PlaylistsSection';
+import MixesSection from './profile/MixesSection';
 
-interface Artist {
-  id: number;
-  name: string;
-  plays: number;
-  image: string;
-}
-
-interface UserData {
-  name: string;
-  email: string;
-  followers: number;
-  following: number;
-  playlists: number;
-  topGenres: string[];
-  topArtists: Artist[];
-}
+// Types
+import { TopTrack, UserData } from './profile/types';
 
 const UserProfileClient = () => {
   const router = useRouter();
@@ -70,51 +54,16 @@ const UserProfileClient = () => {
       { id: 3, name: 'Billie Eilish', plays: 256, image: '/placeholder-artist.jpg' },
       { id: 4, name: 'Post Malone', plays: 231, image: '/placeholder-artist.jpg' },
       { id: 5, name: 'Ariana Grande', plays: 215, image: '/placeholder-artist.jpg' },
-    ]
+    ],
+    topTrack: 'Blinding Lights',
+    topArtist: 'The Weeknd',
+    topPlaylist: 'Tus Mezclas'
   };
 
-  const topTracks: TopTrack[] = [
-    { id: 1, title: 'Canción Favorita 1', artist: 'Artista 1', duration: '3:45', plays: 1245 },
-    { id: 2, title: 'Canción Favorita 2', artist: 'Artista 2', duration: '3:20', plays: 1103 },
-    { id: 3, title: 'Canción Favorita 3', artist: 'Artista 3', duration: '4:12', plays: 987 },
-    { id: 4, title: 'Canción Favorita 4', artist: 'Artista 4', duration: '3:30', plays: 876 },
-    { id: 5, title: 'Canción Favorita 5', artist: 'Artista 5', duration: '3:15', plays: 765 },
-  ];
-
   return (
-    <div className="bg-gradient-to-b from-neutral-900 to-black min-h-screen text-white p-6">
-      {/* Header del perfil */}
-      <div className="flex items-end gap-6 mb-8">
-        <div className="w-48 h-48 bg-gradient-to-br from-purple-600 to-blue-500 rounded-md shadow-2xl flex items-center justify-center">
-          <FiUser className="text-6xl text-white/80" />
-        </div>
-        <div className="flex-1">
-          <p className="text-sm font-semibold text-green-500 mb-2">PERFIL</p>
-          <h1 className="text-6xl font-bold mb-2">{user.name}</h1>
-          {user.email && <p className="text-gray-400 text-sm mb-4">{user.email}</p>}
-          <div className="flex items-center gap-6 text-sm text-gray-400">
-            <span>{user.followers.toLocaleString()} seguidores</span>
-            <span>{user.following} siguiendo</span>
-            <span>{user.playlists} listas</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Resto del componente... */}
-      <div className="flex items-center gap-4 mb-8">
-        <button className="bg-green-500 hover:bg-green-600 text-black font-bold py-3 px-8 rounded-full text-sm flex items-center gap-2 transition-transform transform hover:scale-105">
-          <FaPlay className="text-lg" />
-          Reproducir
-        </button>
-        <button className="bg-transparent border border-gray-600 hover:border-white text-white font-bold py-3 px-6 rounded-full text-sm flex items-center gap-2 transition-all">
-          <FiPlus className="text-lg" />
-          Seguir
-        </button>
-        <button className="text-gray-400 hover:text-white p-2 rounded-full hover:bg-white/10 transition-colors">
-          <FiHeart className="text-xl" />
-        </button>
-      </div>
-
+    <div className="bg-gradient-to-b from-neutral-900 to-black min-h-screen text-white p-6 pb-32 md:pb-24">
+      <ProfileHeader user={user} />
+      
       {/* Pestañas */}
       <div className="border-b border-gray-800 mb-6">
         <div className="flex gap-8">
@@ -142,7 +91,11 @@ const UserProfileClient = () => {
           <div className="col-span-2 text-right">DURACIÓN</div>
         </div>
         
-        {topTracks.map((track, index) => (
+        {[
+          { id: 1, title: 'Canción Favorita 1', artist: user.topArtist || 'Artista', duration: '3:45', plays: 1245 },
+          { id: 2, title: 'Canción Favorita 2', artist: user.topArtist || 'Artista', duration: '3:20', plays: 1103 },
+          { id: 3, title: 'Canción Favorita 3', artist: user.topArtist || 'Artista', duration: '4:12', plays: 987 },
+        ].map((track, index) => (
           <div 
             key={track.id}
             className="grid grid-cols-12 gap-4 items-center py-3 px-4 rounded-md hover:bg-white/10 group cursor-pointer"
@@ -155,12 +108,76 @@ const UserProfileClient = () => {
             </div>
             <div className="col-span-6">
               <div className="font-medium text-white">{track.title}</div>
+              <div className="text-sm text-gray-400">{track.artist}</div>
             </div>
-            <div className="col-span-3">{track.plays.toLocaleString()}</div>
+            <div className="col-span-3 text-gray-400">{track.plays.toLocaleString()}</div>
             <div className="col-span-2 text-right text-gray-400">{track.duration}</div>
           </div>
         ))}
       </div>
+
+      {/* Sección de géneros principales */}
+      <div className="mb-10">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-2xl font-bold">Tus géneros principales</h2>
+          <button className="text-sm text-gray-400 hover:text-white">Ver todo</button>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {user.topGenres.map((genre, index) => (
+            <div 
+              key={index}
+              className="bg-gradient-to-br from-purple-600/20 to-blue-500/20 p-4 rounded-lg border border-white/10 hover:border-white/20 transition-colors cursor-pointer group"
+            >
+              <div className="flex items-center justify-between mb-2">
+                <FiMusic className="text-xl text-purple-400" />
+                <span className="text-xs text-gray-400">Género</span>
+              </div>
+              <h3 className="font-bold text-lg">{genre}</h3>
+              <div className="flex items-center mt-2 text-xs text-gray-400">
+                <FiMusic className="mr-1" />
+                <span>Populares</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Sección de artistas destacados */}
+      <div className="mb-10">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-2xl font-bold">Tus artistas destacados</h2>
+          <button className="text-sm text-gray-400 hover:text-white">Ver todo</button>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          {user.topArtists.map((artist) => (
+            <div 
+              key={artist.id}
+              className="group cursor-pointer"
+            >
+              <div className="relative mb-3 overflow-hidden rounded-full aspect-square bg-gradient-to-br from-purple-600/20 to-blue-500/20 p-1">
+                <div className="relative w-full h-full rounded-full overflow-hidden">
+                  <div className="w-full h-full bg-gradient-to-br from-purple-600 to-blue-500 flex items-center justify-center">
+                    <FaMicrophone className="text-4xl text-white/80" />
+                  </div>
+                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <button className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-black transform hover:scale-105">
+                      <FaPlay className="ml-1" />
+                    </button>
+                  </div>
+                </div>
+                <div className="absolute bottom-0 right-2 bg-green-500 rounded-full w-5 h-5 flex items-center justify-center">
+                  <BsGraphUp className="text-xs text-black" />
+                </div>
+              </div>
+              <h3 className="font-bold text-white text-center">{artist.name}</h3>
+              <p className="text-sm text-gray-400 text-center">{artist.plays} reproducciones</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <PlaylistsSection user={user} />
+      <MixesSection user={user} />
     </div>
   );
 };

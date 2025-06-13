@@ -24,7 +24,9 @@ declare module 'next-auth' {
   }
 
   interface Account {
-    provider?: string;
+    provider: string;
+    type: 'oauth' | 'email' | 'credentials';
+    [key: string]: any;
   }
 
   interface Profile {
@@ -103,52 +105,90 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: 'jwt',
     maxAge: 30 * 24 * 60 * 60, // 30 days
+    updateAge: 24 * 60 * 60, // Actualizar la sesión cada 24 horas
+  },
+  jwt: {
+    secret: process.env.NEXTAUTH_SECRET,
+    maxAge: 30 * 24 * 60 * 60, // 30 días
   },
   
   // Callbacks
   callbacks: {
-    async session({ session, token }) {
+    async session({ session, token, user }) {
       if (session?.user) {
+        // Asegurarse de que el ID del usuario esté disponible en la sesión
         session.user.id = token.sub || token.id || '';
+        
+        // Agregar campos adicionales del usuario a la sesión
+        if (token) {
+          session.user.name = token.name || null;
+          session.user.email = token.email || null;
+          session.user.image = token.picture || null;
+        }
       }
       return session;
     },
-    async jwt({ token, user }) {
+    async jwt({ token, user, account, profile }) {
+      // Pasar los datos del usuario al token
       if (user) {
         token.id = user.id;
+        token.name = user.name;
+        token.email = user.email;
       }
+      
+      // Para proveedores OAuth
+      if (account && profile) {
+        token.provider = account.provider;
+      }
+      
       return token;
     },
-    async signIn({ user, account }) {
-      if (account?.provider === 'google') {
-        try {
-          const client = await clientPromise;
-          const db = client.db(process.env.MONGODB_DB_NAME || 'spotify-clone');
+    async signIn({ user, account, profile }) {
+      try {
+        const client = await clientPromise;
+        const db = client.db(process.env.MONGODB_DB_NAME || 'spotify-clone');
+        
+        // Verificar si el usuario ya existe
+        const existingUser = await db.collection('users').findOne({ 
+          email: user.email 
+        });
+        
+        if (!existingUser) {
+          // Crear un nuevo usuario si no existe
+          const newUser = {
+            email: user.email,
+            name: user.name,
+            image: user.image || null,
+            emailVerified: new Date(),
+            provider: account?.provider || 'credentials',
+            role: 'user',
+            isActive: true,
+            lastLogin: new Date(),
+            preferences: {},
+            createdAt: new Date(),
+            updatedAt: new Date(),
+          };
           
-          // Check if user already exists
-          const existingUser = await db.collection('users').findOne({ 
-            email: user.email 
-          });
-          
-          if (!existingUser) {
-            // Create new user if doesn't exist
-            await db.collection('users').insertOne({
-              email: user.email,
-              name: user.name,
-              image: user.image,
-              emailVerified: new Date(),
-              createdAt: new Date(),
-              updatedAt: new Date()
-            });
+          // Si es un registro con credenciales, ya se creó el usuario en el endpoint de registro
+          if (account?.provider === 'credentials') {
+            return true;
           }
           
-          return true;
-        } catch (error) {
-          console.error('Error in signIn callback:', error);
-          return false;
+          // Para proveedores OAuth, insertar el nuevo usuario
+          await db.collection('users').insertOne(newUser);
+        } else {
+          // Actualizar la última vez que inició sesión
+          await db.collection('users').updateOne(
+            { email: user.email },
+            { $set: { lastLogin: new Date() } }
+          );
         }
+        
+        return true;
+      } catch (error) {
+        console.error('Error en la función signIn:', error);
+        return false;
       }
-      return true;
     }
   },
   

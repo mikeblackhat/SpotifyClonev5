@@ -3,6 +3,257 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { FaArrowLeft, FaUser, FaEnvelope, FaCalendarAlt, FaVenusMars, FaGlobe, FaCheckCircle } from 'react-icons/fa';
+import ReactCountryFlag from 'react-country-flag';
+
+// Lista completa de países con códigos ISO
+const COUNTRIES = [
+  { code: 'AF', name: 'Afganistán' },
+  { code: 'AL', name: 'Albania' },
+  { code: 'DE', name: 'Alemania' },
+  { code: 'AD', name: 'Andorra' },
+  { code: 'AO', name: 'Angola' },
+  { code: 'AI', name: 'Anguila' },
+  { code: 'AQ', name: 'Antártida' },
+  { code: 'AG', name: 'Antigua y Barbuda' },
+  { code: 'SA', name: 'Arabia Saudita' },
+  { code: 'DZ', name: 'Argelia' },
+  { code: 'AR', name: 'Argentina' },
+  { code: 'AM', name: 'Armenia' },
+  { code: 'AW', name: 'Aruba' },
+  { code: 'AU', name: 'Australia' },
+  { code: 'AT', name: 'Austria' },
+  { code: 'AZ', name: 'Azerbaiyán' },
+  { code: 'BS', name: 'Bahamas' },
+  { code: 'BD', name: 'Bangladés' },
+  { code: 'BB', name: 'Barbados' },
+  { code: 'BH', name: 'Baréin' },
+  { code: 'BE', name: 'Bélgica' },
+  { code: 'BZ', name: 'Belice' },
+  { code: 'BJ', name: 'Benín' },
+  { code: 'BM', name: 'Bermudas' },
+  { code: 'BY', name: 'Bielorrusia' },
+  { code: 'BO', name: 'Bolivia' },
+  { code: 'BA', name: 'Bosnia y Herzegovina' },
+  { code: 'BW', name: 'Botsuana' },
+  { code: 'BR', name: 'Brasil' },
+  { code: 'BN', name: 'Brunéi' },
+  { code: 'BG', name: 'Bulgaria' },
+  { code: 'BF', name: 'Burkina Faso' },
+  { code: 'BI', name: 'Burundi' },
+  { code: 'BT', name: 'Bután' },
+  { code: 'CV', name: 'Cabo Verde' },
+  { code: 'KH', name: 'Camboya' },
+  { code: 'CM', name: 'Camerún' },
+  { code: 'CA', name: 'Canadá' },
+  { code: 'QA', name: 'Catar' },
+  { code: 'TD', name: 'Chad' },
+  { code: 'CL', name: 'Chile' },
+  { code: 'CN', name: 'China' },
+  { code: 'CY', name: 'Chipre' },
+  { code: 'VA', name: 'Ciudad del Vaticano' },
+  { code: 'CO', name: 'Colombia' },
+  { code: 'KM', name: 'Comoras' },
+  { code: 'CG', name: 'Congo' },
+  { code: 'KP', name: 'Corea del Norte' },
+  { code: 'KR', name: 'Corea del Sur' },
+  { code: 'CI', name: 'Costa de Marfil' },
+  { code: 'CR', name: 'Costa Rica' },
+  { code: 'HR', name: 'Croacia' },
+  { code: 'CU', name: 'Cuba' },
+  { code: 'CW', name: 'Curazao' },
+  { code: 'DK', name: 'Dinamarca' },
+  { code: 'DM', name: 'Dominica' },
+  { code: 'EC', name: 'Ecuador' },
+  { code: 'EG', name: 'Egipto' },
+  { code: 'SV', name: 'El Salvador' },
+  { code: 'AE', name: 'Emiratos Árabes Unidos' },
+  { code: 'ER', name: 'Eritrea' },
+  { code: 'SK', name: 'Eslovaquia' },
+  { code: 'SI', name: 'Eslovenia' },
+  { code: 'ES', name: 'España' },
+  { code: 'US', name: 'Estados Unidos' },
+  { code: 'EE', name: 'Estonia' },
+  { code: 'ET', name: 'Etiopía' },
+  { code: 'PH', name: 'Filipinas' },
+  { code: 'FI', name: 'Finlandia' },
+  { code: 'FJ', name: 'Fiyi' },
+  { code: 'FR', name: 'Francia' },
+  { code: 'GA', name: 'Gabón' },
+  { code: 'GM', name: 'Gambia' },
+  { code: 'GE', name: 'Georgia' },
+  { code: 'GH', name: 'Ghana' },
+  { code: 'GI', name: 'Gibraltar' },
+  { code: 'GD', name: 'Granada' },
+  { code: 'GR', name: 'Grecia' },
+  { code: 'GL', name: 'Groenlandia' },
+  { code: 'GP', name: 'Guadalupe' },
+  { code: 'GU', name: 'Guam' },
+  { code: 'GT', name: 'Guatemala' },
+  { code: 'GF', name: 'Guayana Francesa' },
+  { code: 'GG', name: 'Guernsey' },
+  { code: 'GN', name: 'Guinea' },
+  { code: 'GQ', name: 'Guinea Ecuatorial' },
+  { code: 'GW', name: 'Guinea-Bisáu' },
+  { code: 'GY', name: 'Guyana' },
+  { code: 'HT', name: 'Haití' },
+  { code: 'HN', name: 'Honduras' },
+  { code: 'HK', name: 'Hong Kong' },
+  { code: 'HU', name: 'Hungría' },
+  { code: 'IN', name: 'India' },
+  { code: 'ID', name: 'Indonesia' },
+  { code: 'IQ', name: 'Irak' },
+  { code: 'IR', name: 'Irán' },
+  { code: 'IE', name: 'Irlanda' },
+  { code: 'BV', name: 'Isla Bouvet' },
+  { code: 'IM', name: 'Isla de Man' },
+  { code: 'CX', name: 'Isla de Navidad' },
+  { code: 'NF', name: 'Isla Norfolk' },
+  { code: 'IS', name: 'Islandia' },
+  { code: 'KY', name: 'Islas Caimán' },
+  { code: 'CC', name: 'Islas Cocos' },
+  { code: 'CK', name: 'Islas Cook' },
+  { code: 'FO', name: 'Islas Feroe' },
+  { code: 'GS', name: 'Islas Georgias del Sur y Sandwich del Sur' },
+  { code: 'HM', name: 'Islas Heard y McDonald' },
+  { code: 'FK', name: 'Islas Malvinas' },
+  { code: 'MP', name: 'Islas Marianas del Norte' },
+  { code: 'MH', name: 'Islas Marshall' },
+  { code: 'PN', name: 'Islas Pitcairn' },
+  { code: 'SB', name: 'Islas Salomón' },
+  { code: 'TC', name: 'Islas Turcas y Caicos' },
+  { code: 'UM', name: 'Islas Ultramar de Estados Unidos' },
+  { code: 'VG', name: 'Islas Vírgenes Británicas' },
+  { code: 'VI', name: 'Islas Vírgenes de los Estados Unidos' },
+  { code: 'IL', name: 'Israel' },
+  { code: 'IT', name: 'Italia' },
+  { code: 'JM', name: 'Jamaica' },
+  { code: 'JP', name: 'Japón' },
+  { code: 'JE', name: 'Jersey' },
+  { code: 'JO', name: 'Jordania' },
+  { code: 'KZ', name: 'Kazajistán' },
+  { code: 'KE', name: 'Kenia' },
+  { code: 'KG', name: 'Kirguistán' },
+  { code: 'KI', name: 'Kiribati' },
+  { code: 'KW', name: 'Kuwait' },
+  { code: 'LB', name: 'Líbano' },
+  { code: 'LA', name: 'Laos' },
+  { code: 'LS', name: 'Lesoto' },
+  { code: 'LV', name: 'Letonia' },
+  { code: 'LR', name: 'Liberia' },
+  { code: 'LY', name: 'Libia' },
+  { code: 'LI', name: 'Liechtenstein' },
+  { code: 'LT', name: 'Lituania' },
+  { code: 'LU', name: 'Luxemburgo' },
+  { code: 'MX', name: 'México' },
+  { code: 'MC', name: 'Mónaco' },
+  { code: 'MO', name: 'Macao' },
+  { code: 'MK', name: 'Macedonia del Norte' },
+  { code: 'MG', name: 'Madagascar' },
+  { code: 'MY', name: 'Malasia' },
+  { code: 'MW', name: 'Malaui' },
+  { code: 'MV', name: 'Maldivas' },
+  { code: 'ML', name: 'Malí' },
+  { code: 'MT', name: 'Malta' },
+  { code: 'MA', name: 'Marruecos' },
+  { code: 'MQ', name: 'Martinica' },
+  { code: 'MU', name: 'Mauricio' },
+  { code: 'MR', name: 'Mauritania' },
+  { code: 'YT', name: 'Mayotte' },
+  { code: 'FM', name: 'Micronesia' },
+  { code: 'MD', name: 'Moldavia' },
+  { code: 'MN', name: 'Mongolia' },
+  { code: 'ME', name: 'Montenegro' },
+  { code: 'MS', name: 'Montserrat' },
+  { code: 'MZ', name: 'Mozambique' },
+  { code: 'MM', name: 'Myanmar' },
+  { code: 'NA', name: 'Namibia' },
+  { code: 'NR', name: 'Nauru' },
+  { code: 'NP', name: 'Nepal' },
+  { code: 'NI', name: 'Nicaragua' },
+  { code: 'NE', name: 'Níger' },
+  { code: 'NG', name: 'Nigeria' },
+  { code: 'NU', name: 'Niue' },
+  { code: 'NO', name: 'Noruega' },
+  { code: 'NC', name: 'Nueva Caledonia' },
+  { code: 'NZ', name: 'Nueva Zelanda' },
+  { code: 'OM', name: 'Omán' },
+  { code: 'NL', name: 'Países Bajos' },
+  { code: 'PK', name: 'Pakistán' },
+  { code: 'PW', name: 'Palaos' },
+  { code: 'PA', name: 'Panamá' },
+  { code: 'PG', name: 'Papúa Nueva Guinea' },
+  { code: 'PY', name: 'Paraguay' },
+  { code: 'PE', name: 'Perú' },
+  { code: 'PF', name: 'Polinesia Francesa' },
+  { code: 'PL', name: 'Polonia' },
+  { code: 'PT', name: 'Portugal' },
+  { code: 'PR', name: 'Puerto Rico' },
+  { code: 'GB', name: 'Reino Unido' },
+  { code: 'CF', name: 'República Centroafricana' },
+  { code: 'CZ', name: 'República Checa' },
+  { code: 'CD', name: 'República Democrática del Congo' },
+  { code: 'DO', name: 'República Dominicana' },
+  { code: 'RE', name: 'Reunión' },
+  { code: 'RW', name: 'Ruanda' },
+  { code: 'RO', name: 'Rumanía' },
+  { code: 'RU', name: 'Rusia' },
+  { code: 'EH', name: 'Sahara Occidental' },
+  { code: 'WS', name: 'Samoa' },
+  { code: 'AS', name: 'Samoa Americana' },
+  { code: 'BL', name: 'San Bartolomé' },
+  { code: 'KN', name: 'San Cristóbal y Nieves' },
+  { code: 'SM', name: 'San Marino' },
+  { code: 'MF', name: 'San Martín' },
+  { code: 'PM', name: 'San Pedro y Miquelón' },
+  { code: 'VC', name: 'San Vicente y las Granadinas' },
+  { code: 'SH', name: 'Santa Elena' },
+  { code: 'LC', name: 'Santa Lucía' },
+  { code: 'ST', name: 'Santo Tomé y Príncipe' },
+  { code: 'SN', name: 'Senegal' },
+  { code: 'RS', name: 'Serbia' },
+  { code: 'SC', name: 'Seychelles' },
+  { code: 'SL', name: 'Sierra Leona' },
+  { code: 'SG', name: 'Singapur' },
+  { code: 'SX', name: 'Sint Maarten' },
+  { code: 'SY', name: 'Siria' },
+  { code: 'SO', name: 'Somalia' },
+  { code: 'LK', name: 'Sri Lanka' },
+  { code: 'SZ', name: 'Suazilandia' },
+  { code: 'ZA', name: 'Sudáfrica' },
+  { code: 'SD', name: 'Sudán' },
+  { code: 'SS', name: 'Sudán del Sur' },
+  { code: 'SE', name: 'Suecia' },
+  { code: 'CH', name: 'Suiza' },
+  { code: 'SR', name: 'Surinam' },
+  { code: 'SJ', name: 'Svalbard y Jan Mayen' },
+  { code: 'TH', name: 'Tailandia' },
+  { code: 'TW', name: 'Taiwán' },
+  { code: 'TZ', name: 'Tanzania' },
+  { code: 'TJ', name: 'Tayikistán' },
+  { code: 'IO', name: 'Territorio Británico del Océano Índico' },
+  { code: 'TF', name: 'Tierras Australes Francesas' },
+  { code: 'TL', name: 'Timor Oriental' },
+  { code: 'TG', name: 'Togo' },
+  { code: 'TK', name: 'Tokelau' },
+  { code: 'TO', name: 'Tonga' },
+  { code: 'TT', name: 'Trinidad y Tobago' },
+  { code: 'TN', name: 'Túnez' },
+  { code: 'TM', name: 'Turkmenistán' },
+  { code: 'TR', name: 'Turquía' },
+  { code: 'TV', name: 'Tuvalu' },
+  { code: 'UA', name: 'Ucrania' },
+  { code: 'UG', name: 'Uganda' },
+  { code: 'UY', name: 'Uruguay' },
+  { code: 'UZ', name: 'Uzbekistán' },
+  { code: 'VU', name: 'Vanuatu' },
+  { code: 'VE', name: 'Venezuela' },
+  { code: 'VN', name: 'Vietnam' },
+  { code: 'WF', name: 'Wallis y Futuna' },
+  { code: 'YE', name: 'Yemen' },
+  { code: 'DJ', name: 'Yibuti' },
+  { code: 'ZM', name: 'Zambia' },
+  { code: 'ZW', name: 'Zimbabue' },
+].sort((a, b) => a.name.localeCompare(b.name)); // Ordenar alfabéticamente
 import { toast } from 'react-hot-toast';
 import { Modal } from '@/components/ui/Modal';
 
@@ -296,13 +547,8 @@ export default function EditProfileForm() {
                     name="birthDate"
                     value={profile.birthDate}
                     onChange={handleChange}
-                    className="w-full text-sm bg-gray-800/80 border border-gray-700 rounded-lg px-4 py-2.5 text-white appearance-none focus:outline-none focus:ring-2 focus:ring-green-500/50 focus:border-transparent transition-all duration-200"
+                    className="w-full text-sm bg-gray-800/80 border border-gray-700 rounded-lg px-4 py-2.5 text-white appearance-none focus:outline-none focus:ring-2 focus:ring-green-500/50 focus:border-transparent transition-all duration-200 [&::-webkit-calendar-picker-indicator]:invert(0.5) [&::-webkit-calendar-picker-indicator]:cursor-pointer"
                   />
-                  <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                    <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                  </div>
                 </div>
               </div>
 
@@ -340,19 +586,40 @@ export default function EditProfileForm() {
                   <FaGlobe className="mr-2 text-green-400" /> 
                   <span>País/Región</span>
                 </label>
-                <div className="relative">
+                <div className="relative flex items-center">
+                  {profile.country && (
+                    <div className="absolute left-3 z-10 flex items-center h-full">
+                      <ReactCountryFlag 
+                        countryCode={profile.country} 
+                        svg 
+                        style={{
+                          width: '1.25em',
+                          height: '1.25em',
+                          borderRadius: '2px',
+                          objectFit: 'cover',
+                          boxShadow: 'none',
+                          border: 'none',
+                          lineHeight: '1em',
+                          display: 'inline-block'
+                        }}
+                        title={COUNTRIES.find(c => c.code === profile.country)?.name}
+                      />
+                    </div>
+                  )}
                   <select
                     id="country"
                     name="country"
                     value={profile.country}
                     onChange={handleChange}
-                    className="w-full text-sm bg-gray-800/80 border border-gray-700 rounded-lg px-4 py-2.5 text-white appearance-none focus:outline-none focus:ring-2 focus:ring-green-500/50 focus:border-transparent transition-all duration-200 cursor-pointer"
+                    className={`w-full text-sm bg-gray-800/80 border border-gray-700 rounded-lg py-2.5 pr-10 text-white appearance-none focus:outline-none focus:ring-2 focus:ring-green-500/50 focus:border-transparent transition-all duration-200 cursor-pointer ${
+                      profile.country ? 'pl-12' : 'pl-4'
+                    }`}
                   >
-                    <option value="MX">México</option>
-                    <option value="ES">España</option>
-                    <option value="AR">Argentina</option>
-                    <option value="CO">Colombia</option>
-                    <option value="US">Estados Unidos</option>
+                    {COUNTRIES.map((country) => (
+                      <option key={country.code} value={country.code}>
+                        {country.name}
+                      </option>
+                    ))}
                   </select>
                   <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                     <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

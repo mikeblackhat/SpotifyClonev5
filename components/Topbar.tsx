@@ -11,20 +11,27 @@ import { useSession, signIn, signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
+// Componente de menú de usuario que muestra el avatar y el menú desplegable
 const UserMenu = () => {
   const router = useRouter();
+  // Obtener la sesión del usuario y su estado actual
   const { data: session, status } = useSession();
+  // Estado para controlar si el menú está abierto o cerrado
   const [open, setOpen] = useState(false);
+  // Referencia al contenedor del menú para detectar clics fuera de él
   const menuRef = useRef<HTMLDivElement>(null);
   
   const handleSignOut = async () => {
     try {
-      // Cerrar sesión con NextAuth
-      await signOut({ redirect: false });
-      // Redirigir a la página de inicio
-      window.location.href = '/';
+      // Cerrar sesión con NextAuth y redirigir a la página de inicio
+      await signOut({ 
+        redirect: true,
+        callbackUrl: '/' 
+      });
     } catch (error) {
       console.error('Error al cerrar sesión:', error);
+      // En caso de error, redirigir a la página de inicio
+      window.location.href = '/';
     }
   };
   
@@ -49,44 +56,54 @@ const UserMenu = () => {
     return 'U';
   };
   
-  // Si no hay sesión, no mostrar nada
+  // Si el usuario no ha iniciado sesión, no mostrar el menú de usuario
   if (status === 'unauthenticated') {
     return null;
   }
 
+  // Efecto para cerrar el menú al hacer clic fuera de él
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
+      // Si el clic fue fuera del menú, cerrarlo
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         setOpen(false);
       }
     };
+    // Agregar el event listener solo cuando el menú está abierto
     if (open) document.addEventListener("mousedown", handleClickOutside);
+    // Limpiar el event listener al desmontar el componente
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [open]);
 
   return (
+    // Contenedor relativo para posicionar el menú desplegable
     <div className="relative" ref={menuRef}>
+      {/* Botón del avatar del usuario */}
       <button
-        className="flex items-center space-x-2 bg-black/30 hover:bg-black/50 rounded-full p-0.5 pr-2 transition-colors"
-        onClick={() => setOpen((o) => !o)}
+        className="flex items-center justify-center rounded-full overflow-hidden w-9 h-9 hover:opacity-90 transition-opacity"
+        onClick={() => setOpen((o) => !o)} // Alternar estado abierto/cerrado
         aria-label="Abrir menú de usuario"
       >
-        <div className="w-8 h-8 bg-gradient-to-br from-green-600 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
-          {getUserInitial()}
-        </div>
-        {session?.user?.username ? (
-          <span className="text-white text-sm font-medium hidden sm:inline-block">
-            {session.user.username}
-          </span>
-        ) : session?.user?.name && (
-          <span className="text-white text-sm font-medium hidden sm:inline-block">
-            {formatName(session.user.name)}
-          </span>
+        {session?.user?.image ? (
+          // Mostrar imagen de perfil si está disponible
+          <img 
+            src={session.user.image} 
+            alt="Foto de perfil" 
+            className="w-full h-full object-cover"
+            referrerPolicy="no-referrer"
+          />
+        ) : (
+          // Mostrar inicial en un círculo de color si no hay imagen
+          <div className="w-full h-full bg-gradient-to-br from-green-600 to-blue-600 flex items-center justify-center text-white font-bold text-sm">
+            {getUserInitial()}
+          </div>
         )}
       </button>
+      {/* Menú desplegable que se muestra al hacer clic en el avatar */}
       {open && (
         <div className="absolute right-0 mt-2 w-56 bg-neutral-900 border border-neutral-700 rounded-lg shadow-lg py-2 z-50 animate-fade-in flex flex-col">
           {session?.user && (
+            /* Sección de información del usuario */
             <div className="px-4 py-3 border-b border-neutral-700">
               <p className="text-white font-medium text-sm">{formatName(session.user.name)}</p>
               <p className="text-neutral-400 text-xs">{session.user.email || ''}</p>

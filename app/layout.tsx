@@ -6,6 +6,7 @@ import { Figtree } from "next/font/google";
 import { usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { Providers } from './providers';
+import { memo } from 'react';
 import Sidebar from "@/components/Sidebar";
 import Topbar from "@/components/Topbar";
 import Rightbar from "@/components/Rightbar";
@@ -16,58 +17,63 @@ import SignupBanner from "@/components/SignupBanner";
 const font = Figtree({ subsets: ["latin"] });
 
 // Componente que maneja la lógica de autenticación
-function AuthenticatedLayout({ children }: { children: React.ReactNode }) {
+const AuthenticatedLayout = memo(function AuthenticatedLayout({ 
+  children 
+}: { 
+  children: React.ReactNode 
+}) {
   const [showRightbar, setShowRightbar] = useState(false);
-  const { data: session, status } = useSession();
+  const { status } = useSession({
+    required: false,
+  });
   const pathname = usePathname();
   const isAuthPage = pathname?.startsWith('/auth');
   const isLoggedIn = status === 'authenticated';
   
   // Mostrar rightbar cuando el usuario está autenticado
   useEffect(() => {
-    console.log('Auth status changed:', { status, isLoggedIn });
-    if (isLoggedIn) {
-      console.log('User is authenticated, showing rightbar');
-      setShowRightbar(true);
-    } else {
-      setShowRightbar(false);
-    }
-  }, [status, isLoggedIn]);
-  
-  // Debug logs
-  console.log('AuthenticatedLayout - Status:', status);
-  console.log('AuthenticatedLayout - isLoggedIn:', isLoggedIn);
-  console.log('AuthenticatedLayout - showRightbar:', showRightbar);
-  console.log('AuthenticatedLayout - Session:', session);
+    setShowRightbar(isLoggedIn);
+  }, [isLoggedIn]);
   
   // Si es una página de autenticación, mostramos solo el contenido
   if (isAuthPage) {
     return <>{children}</>;
   }
   
-  // Debug logs
-  console.log('Authentication status:', status);
-  console.log('isLoggedIn:', isLoggedIn);
-  console.log('showRightbar:', showRightbar);
-  
   // Para páginas que requieren autenticación
   return (
     <div className="flex flex-col min-h-0 min-w-0 h-full w-full overflow-hidden">
-      <Topbar />
-      <div className="flex flex-1 min-h-0 min-w-0 overflow-hidden">
+      <div className="z-50 relative">
+        <Topbar />
+      </div>
+      <div className="flex flex-1 min-h-0 min-w-0 overflow-hidden relative">
         <Sidebar />
         <main 
-          className={`min-h-0 min-w-0 overflow-y-auto custom-scrollbar flex-1 px-1 md:px-2 pt-1 md:pt-1.5 backdrop-blur-md bg-black/70 ${isLoggedIn ? 'pr-0' : 'w-full'}`}
-          style={{ width: isLoggedIn && showRightbar ? 'calc(100% - 340px)' : '100%' }}
+          className={`min-h-0 min-w-0 overflow-y-auto custom-scrollbar flex-1 px-1 md:px-2 pt-1 md:pt-1.5 backdrop-blur-md bg-black/70 ${showRightbar ? 'md:mr-80' : ''}`}
+          style={{ width: showRightbar ? 'calc(100% - 320px)' : '100%' }}
         >
           {children}
         </main>
-        {isLoggedIn && <Rightbar />}
+        {isLoggedIn && showRightbar && (
+          <div 
+            className="fixed top-0 right-0 h-full w-80 bg-neutral-900/80 backdrop-blur-md z-40 overflow-y-auto"
+            style={{ paddingTop: '64px' }}
+          >
+            <Rightbar />
+          </div>
+        )}
       </div>
-      <FooterPlayer showRightbar={showRightbar} setShowRightbar={isLoggedIn ? setShowRightbar : () => {}} />
+      {isLoggedIn && (
+        <FooterPlayer 
+          showRightbar={showRightbar} 
+          setShowRightbar={setShowRightbar} 
+        />
+      )}
     </div>
   );
-}
+});
+
+AuthenticatedLayout.displayName = 'AuthenticatedLayout';
 
 
 

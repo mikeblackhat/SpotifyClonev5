@@ -4,68 +4,117 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { FaSpotify, FaCheck, FaTimes, FaCrown } from 'react-icons/fa';
 import { BsArrowRight } from 'react-icons/bs';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+
+// Interfaz para los datos del usuario en la sesión
+interface SessionUser {
+  id: string;
+  name?: string | null;
+  email?: string | null;
+  image?: string | null;
+  plan?: string;
+  provider?: string;
+}
 
 const PremiumPage = () => {
   const { data: session } = useSession();
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
 
+  // Efecto para seleccionar automáticamente el plan del usuario al cargar
+  useEffect(() => {
+    // Hacer un type assertion para asegurar que el usuario tiene el tipo correcto
+    const user = session?.user as SessionUser | undefined;
+    
+    if (user) {
+      // Usar el tipo de sesión correctamente tipado
+      const userPlan = user.plan;
+      console.log('Plan del usuario actual:', userPlan);
+      
+      if (userPlan) {
+        // Convertir a minúsculas para comparación insensible a mayúsculas
+        const userPlanLower = userPlan.toLowerCase();
+        // Verificar si el plan del usuario existe en la lista de planes (comparación insensible)
+        const matchingPlan = plans.find(plan => plan.id.toLowerCase() === userPlanLower);
+        
+        if (matchingPlan) {
+          console.log('Plan encontrado:', matchingPlan.id, 'para el plan del usuario:', userPlan);
+          console.log('Estableciendo plan seleccionado:', matchingPlan.id);
+          setSelectedPlan(matchingPlan.id);
+          return;
+        } else {
+          console.warn(`El plan '${userPlan}' no existe en la lista de planes disponibles`);
+          // Si el plan no existe, establecer el plan gratuito por defecto
+          setSelectedPlan('free');
+        }
+      } else {
+        // Si no hay plan definido, establecer el plan gratuito por defecto
+        console.log('Usuario sin plan definido, estableciendo plan por defecto: free');
+        setSelectedPlan('free');
+      }
+    } else {
+      // Si no hay sesión, establecer el plan gratuito por defecto
+      console.log('No hay sesión activa, estableciendo plan por defecto: free');
+      setSelectedPlan('free');
+    }
+  }, [session]);
+
   const plans = [
     {
-      id: 'individual',
-      name: 'Individual',
-      price: 4.99,
-      description: 'Para 1 cuenta',
+      id: 'free',
+      name: 'Free',
+      price: 0,
+      description: 'Para todos',
       features: [
-        'Escucha música sin anuncios',
-        'Reproduce canciones en cualquier orden',
-        'Escucha música sin conexión',
-        'Reproducción on-demand',
-        'Calidad de audio alta'
-      ],
-      popular: false
-    },
-    {
-      id: 'duo',
-      name: 'Duo',
-      price: 6.99,
-      description: 'Para 2 cuentas',
-      features: [
-        '2 cuentas Premium para parejas',
-        'Duo Mix: una playlist para dos',
-        'Música sin anuncios, sin conexión, on-demand',
-        'Cancelación en cualquier momento'
-      ],
-      popular: true
-    },
-    {
-      id: 'familiar',
-      name: 'Familiar',
-      price: 8.99,
-      description: 'Hasta 6 cuentas',
-      features: [
-        '6 cuentas Premium para familiares',
-        'Family Mix: una playlist para todos',
-        'Bloqueo de música explícita',
-        'Música sin anuncios, sin conexión, on-demand',
-        'Spotify Kids: una aplicación independiente para niños'
+        'Escucha música con anuncios',
+        '5 saltos por hora',
+        'Crea y comparte playlists',
+        'Calidad de audio estándar'
       ],
       popular: false
     },
     {
       id: 'estudiante',
       name: 'Estudiante',
-      price: 2.99,
+      price: 0.99,
       description: 'Para estudiantes universitarios',
       features: [
         'Descuento especial para estudiantes',
         'Música sin anuncios',
         'Reproducción on-demand',
         'Calidad de audio alta',
-        'Hulu (solo en EE.UU.)',
-        'SHOWTIME (solo en EE.UU.)',
-        'Se requiere verificación de estudiante'
+        'Se requiere verificación de estudiante',
+        'Reproduce canciones de forma ilimitada'
+      ],
+      popular: false
+    },
+    {
+      id: 'individual',
+      name: 'Individual',
+      price: 2.99,
+      description: 'Para 1 cuenta',
+      features: [
+        'Escucha música sin anuncios',
+        'Reproduce canciones en cualquier orden',
+        'Escucha música sin conexión',
+        'Reproducción on-demand',
+        'Calidad de audio alta',
+        'Reproduce canciones de forma ilimitada'
+      ],
+      popular: true
+    },
+    {
+      id: 'artista',
+      name: 'Artista',
+      price: 9.99,
+      description: 'Para creadores de música',
+      features: [
+        'Todo lo de Individual',
+        'Sube y comparte tu música',
+        'Agencia encargada de la publicidad de tus canciones',
+        'Estadísticas detalladas de reproducción',
+        'Distribución a todas las plataformas',
+        'Y muchos beneficios más'
       ],
       popular: false
     }
@@ -103,15 +152,20 @@ const PremiumPage = () => {
             <FaSpotify className="text-3xl mr-2" />
             <span className="text-xl font-bold">Spotify Premium</span>
           </div>
-          <h1 className="text-4xl font-bold mb-4">Elige tu plan Premium</h1>
-          <p className="text-lg text-gray-300 mb-8">
+          <h1 className="text-4xl font-bold mb-2">Elige tu plan Premium</h1>
+          <p className="text-lg text-gray-300 mb-2">
             Escucha sin límites en tu teléfono, altavoces y otros dispositivos.
           </p>
+          {session?.user && (
+            <p className="text-sm text-green-500 font-medium mb-6">
+              Tu plan actual: <span className="text-white">{(session.user as any)?.plan?.toUpperCase() || 'GRATIS'}</span>
+            </p>
+          )}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
             {plans.map((plan) => (
               <div 
                 key={plan.id}
-                className={`relative flex flex-col p-5 h-full w-full bg-black bg-opacity-30 rounded-lg cursor-pointer transition-all duration-300 border-2 min-h-[480px] max-w-[300px] mx-auto ${
+                className={`relative flex flex-col p-5 h-full w-full bg-black bg-opacity-30 rounded-lg cursor-pointer transition-all duration-300 border-2 min-h-[480px] max-w-[300px] mx-auto text-left ${
                   selectedPlan === plan.id ? 'border-green-500 bg-opacity-50' : 'border-transparent hover:border-gray-600'
                 }`}
                 onClick={() => handleSelectPlan(plan.id)}
@@ -121,7 +175,7 @@ const PremiumPage = () => {
                     MÁS POPULAR
                   </div>
                 )}
-                <div className="flex flex-col h-full justify-between">
+                <div className="flex flex-col h-full justify-between text-left">
                   <div className="flex items-center justify-between mb-2">
                     <h3 className="text-lg font-bold">{plan.name}</h3>
                     {plan.popular && <FaCrown className="text-yellow-400 text-sm" />}
@@ -139,9 +193,15 @@ const PremiumPage = () => {
                   </ul>
                   <div className="mt-6">
                     <button 
-                      className={`w-full py-2 text-sm rounded-full font-bold text-black ${selectedPlan === plan.id ? 'bg-green-500 hover:bg-green-400' : 'bg-white hover:bg-gray-200'}`}
+                      className={`w-full py-2 text-sm rounded-full font-bold text-black ${
+                        selectedPlan === plan.id && plan.id === (session?.user as any)?.plan?.toLowerCase() 
+                          ? 'bg-green-500 hover:bg-green-400' 
+                          : 'bg-white hover:bg-gray-200'
+                      }`}
                     >
-                      {selectedPlan === plan.id ? 'Seleccionado' : 'Seleccionar'}
+                      {selectedPlan === plan.id && plan.id === (session?.user as any)?.plan?.toLowerCase() 
+                        ? 'Plan Actual' 
+                        : 'Seleccionar'}
                     </button>
                   </div>
                 </div>

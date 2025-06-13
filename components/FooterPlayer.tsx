@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { memo, useCallback } from "react";
 import { FaRegHeart, FaRandom, FaStepBackward, FaPlay, FaPause, FaStepForward, FaRedo, FaVolumeUp, FaListUl, FaDesktop, FaExpand, FaCompress } from "react-icons/fa";
 import { useSession } from "next-auth/react";
 
@@ -9,23 +9,19 @@ interface FooterPlayerProps {
   setShowRightbar: (show: boolean) => void;
 }
 
-const FooterPlayer: React.FC<FooterPlayerProps> = ({ showRightbar, setShowRightbar }) => {
-  const { data: session, status } = useSession();
-  
-  // Debug logs
-  console.log('FooterPlayer - Status:', status);
-  console.log('FooterPlayer - Session:', session);
-  console.log('FooterPlayer - showRightbar:', showRightbar);
+const FooterPlayer: React.FC<FooterPlayerProps> = memo(({ showRightbar, setShowRightbar }) => {
+  const { status } = useSession({
+    required: false,
+  });
   
   // No mostrar el reproductor si el usuario no está autenticado
-  if (status === 'unauthenticated' || status === 'loading') {
-    console.log('FooterPlayer - Not rendering: unauthenticated or loading');
+  if (status !== 'authenticated') {
     return null;
   }
   
-  const toggleRightbar = () => {
+  const toggleRightbar = useCallback((): void => {
     setShowRightbar(!showRightbar);
-  };
+  }, [showRightbar, setShowRightbar]);
   
   return (
     <footer className="w-full bg-neutral-900/95 border-t border-neutral-800 flex flex-col md:flex-row items-center justify-between px-4 py-2 fixed bottom-0 left-0 z-40 backdrop-blur-md transition-all duration-300">
@@ -117,6 +113,8 @@ const FooterPlayer: React.FC<FooterPlayerProps> = ({ showRightbar, setShowRightb
       </div>
     </footer>
   );
-};
+});
+
+FooterPlayer.displayName = 'FooterPlayer';
 
 export default FooterPlayer;
