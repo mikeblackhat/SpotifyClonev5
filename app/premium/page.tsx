@@ -106,15 +106,14 @@ const PremiumPage = () => {
     {
       id: 'artista',
       name: 'Artista',
-      price: 9.99,
+      price: 99.99,
       description: 'Para creadores de música',
       features: [
         'Todo lo de Individual',
-        'Sube y comparte tu música',
-        'Agencia encargada de la publicidad de tus canciones',
+        'Servicio de subida de canciones con ByteCraft Media',
+        'Distribución profesional a todas las plataformas',
         'Estadísticas detalladas de reproducción',
-        'Distribución a todas las plataformas',
-        'Y muchos beneficios más'
+        'Promoción y visibilidad mejorada'
       ],
       popular: false
     }
@@ -199,8 +198,10 @@ const PremiumPage = () => {
                           : 'bg-white hover:bg-gray-200'
                       }`}
                     >
-                      {selectedPlan === plan.id && plan.id === (session?.user as any)?.plan?.toLowerCase() 
-                        ? 'Plan Actual' 
+                      {selectedPlan === plan.id
+                        ? plan.id === (session?.user as any)?.plan?.toLowerCase()
+                          ? 'Plan Actual'
+                          : 'Seleccionado'
                         : 'Seleccionar'}
                     </button>
                   </div>
@@ -291,6 +292,66 @@ const PremiumPage = () => {
               <p className="text-gray-400">{item.answer}</p>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* ByteCraft Media Section */}
+      <div className="max-w-6xl mx-auto px-6 py-16 mt-12 bg-gradient-to-r from-blue-900 to-purple-900 rounded-xl">
+        <div className="flex flex-col md:flex-row items-center gap-8">
+          <div className="md:w-2/3">
+            <h2 className="text-3xl font-bold mb-4">Servicio Profesional de Distribución Musical</h2>
+            <p className="text-lg text-gray-300 mb-6">
+              En asociación con <span className="font-bold text-white">ByteCraft Media</span>, ofrecemos un servicio completo de distribución 
+              musical que lleva tu música a todas las plataformas digitales principales como Spotify, Apple Music, Amazon Music y más.
+            </p>
+            <div className="space-y-4 mb-6">
+              <div className="flex items-start">
+                <FaCheck className="text-green-400 mt-1 mr-2 flex-shrink-0" />
+                <div>
+                  <h3 className="font-semibold">Distribución Global</h3>
+                  <p className="text-gray-300 text-sm">Llega a millones de oyentes en todas las plataformas digitales.</p>
+                </div>
+              </div>
+              <div className="flex items-start">
+                <FaCheck className="text-green-400 mt-1 mr-2 flex-shrink-0" />
+                <div>
+                  <h3 className="font-semibold">Regalías al 100%</h3>
+                  <p className="text-gray-300 text-sm">Recibe todas las regalías que generan tus canciones.</p>
+                </div>
+              </div>
+              <div className="flex items-start">
+                <FaCheck className="text-green-400 mt-1 mr-2 flex-shrink-0" />
+                <div>
+                  <h3 className="font-semibold">Soporte Personalizado</h3>
+                  <p className="text-gray-300 text-sm">Nuestro equipo está contigo en cada paso del proceso.</p>
+                </div>
+              </div>
+            </div>
+            <a 
+              href="https://bytecraftmedia.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-block bg-white text-black font-bold py-3 px-8 rounded-full hover:bg-gray-200 transition-colors"
+            >
+              Conoce más en ByteCraft Media
+            </a>
+          </div>
+          <div className="md:w-1/3 flex justify-center">
+            <div className="bg-black bg-opacity-30 p-6 rounded-xl backdrop-blur-sm">
+              <h3 className="text-xl font-bold mb-4">¿Eres artista independiente?</h3>
+              <p className="text-gray-300 mb-4">
+                Sube tu música con nuestro servicio premium y llega a millones de oyentes en todo el mundo.
+              </p>
+              <a 
+                href="https://bytecraftmedia.com/upload" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-block bg-green-500 text-black font-bold py-2 px-6 rounded-full hover:bg-green-400 transition-colors text-sm"
+              >
+                Subir mi música ahora
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>

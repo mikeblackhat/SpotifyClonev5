@@ -49,10 +49,15 @@ const AuthenticatedLayout = memo(function AuthenticatedLayout({
       <div className="flex flex-1 min-h-0 min-w-0 overflow-hidden relative">
         <Sidebar />
         <main 
-          className={`min-h-0 min-w-0 overflow-y-auto custom-scrollbar flex-1 px-1 md:px-2 pt-1 md:pt-1.5 backdrop-blur-md bg-black/70 ${showRightbar ? 'md:mr-80' : ''}`}
-          style={{ width: showRightbar ? 'calc(100% - 320px)' : '100%' }}
+          className={`min-h-0 min-w-0 overflow-y-auto custom-scrollbar flex-1 px-1 md:px-2 pt-1 md:pt-1.5 pb-24 backdrop-blur-md bg-black/70 ${showRightbar ? 'md:mr-80' : ''}`}
+          style={{ 
+            width: showRightbar ? 'calc(100% - 320px)' : '100%',
+            paddingBottom: '6rem' // Asegura espacio para el footer
+          }}
         >
-          {children}
+          <div className="min-h-[calc(100vh-10rem)]">
+            {children}
+          </div>
         </main>
         {isLoggedIn && showRightbar && (
           <div 

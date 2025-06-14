@@ -24,7 +24,7 @@ const FooterPlayer: React.FC<FooterPlayerProps> = memo(({ showRightbar, setShowR
   }, [showRightbar, setShowRightbar]);
   
   return (
-    <footer className="w-full bg-neutral-900/95 border-t border-neutral-800 flex flex-col md:flex-row items-center justify-between px-4 py-2 fixed bottom-0 left-0 z-40 backdrop-blur-md transition-all duration-300">
+    <footer className="w-full h-16 bg-neutral-900/95 border-t border-neutral-800 flex flex-col md:flex-row items-center justify-between px-4 py-2 fixed bottom-0 left-0 z-40 backdrop-blur-md transition-all duration-300">
       {/* Info canción actual */}
       <div className="flex items-center gap-2 md:gap-4 w-full md:w-auto md:min-w-[200px] max-w-full overflow-hidden">
         <img 

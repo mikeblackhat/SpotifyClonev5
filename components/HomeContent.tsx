@@ -6,6 +6,7 @@ import { FaPlay } from 'react-icons/fa';
 import { ArtistsCarousel } from "./home/ArtistsCarousel";
 import { AlbumsCarousel } from "./home/AlbumsCarousel";
 import { PlaylistsCarousel } from "./home/PlaylistsCarousel";
+import { GenresCarousel } from "./home/GenresCarousel";
 import { useCarousel } from "@/hooks/useCarousel";
 import { ImageWithFallback } from "./ui/ImageWithFallback";
 import { FaMusic } from 'react-icons/fa';
@@ -215,20 +216,27 @@ const HomeContent = () => {
         {renderSongsCarousel()}
         
         {/* Secciones de carruseles */}
-        <ArtistsCarousel 
-          title={status === 'authenticated' ? 'Tus artistas favoritos' : 'Artistas populares'} 
-          showAllText="Mostrar todo" 
-        />
-        
-        <AlbumsCarousel 
-          title={status === 'authenticated' ? 'Álbumes que te pueden gustar' : 'Álbumes y sencillos populares'} 
-          showAllText="Mostrar todo" 
-        />
-        
-        <PlaylistsCarousel 
-          title={status === 'authenticated' ? 'Hecho para ti' : 'Listas destacadas'} 
-          showAllText="Mostrar todo" 
-        />
+        <div className="space-y-10">
+          <GenresCarousel 
+            title={status === 'authenticated' ? 'Explorar géneros' : 'Géneros populares'}
+            showAllText="Ver todo"
+          />
+          
+          <ArtistsCarousel 
+            title={status === 'authenticated' ? 'Tus artistas favoritos' : 'Artistas populares'}
+            showAllText="Ver todo"
+          />
+          
+          <AlbumsCarousel 
+            title={status === 'authenticated' ? 'Álbumes que te pueden gustar' : 'Álbumes y sencillos populares'}
+            showAllText="Ver todo"
+          />
+          
+          <PlaylistsCarousel 
+            title={status === 'authenticated' ? 'Hecho para ti' : 'Listas destacadas'}
+            showAllText="Ver todo"
+          />
+        </div>
         
         {renderTrendingSection()}
       </div>
