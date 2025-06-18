@@ -23,7 +23,8 @@
       "@/*": ["./*"],
       "@/types/*": ["./types/*"],
       "@/components/*": ["./components/*"],
-      "@/lib/*": ["./lib/*"]
+      "@/lib/*": ["./lib/*"],
+      "@/data/*": ["./src/data/*"]
     },
     "typeRoots": ["./node_modules/@types", "./types"]
   },

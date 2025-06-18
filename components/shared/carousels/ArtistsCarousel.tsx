@@ -1,8 +1,9 @@
 import React from 'react';
 import { FaMicrophone, FaPlay, FaMusic } from 'react-icons/fa';
 import { BsGraphUp } from 'react-icons/bs';
-import { useCarousel } from '../../hooks/useCarousel';
+import useCarousel from '@/hooks/useCarousel';
 import { ImageWithFallback } from '../ui/ImageWithFallback';
+import { useSampleData } from '@/hooks/useSampleData';
 
 interface ArtistsCarouselProps {
   title: string;
@@ -13,6 +14,8 @@ export const ArtistsCarousel: React.FC<ArtistsCarouselProps> = ({
   title = 'Artistas populares', 
   showAllText = 'Mostrar todo' 
 }) => {
+  const { popularArtists } = useSampleData();
+  
   const {
     carouselRef,
     showPrevBtn,
@@ -20,7 +23,7 @@ export const ArtistsCarousel: React.FC<ArtistsCarouselProps> = ({
     next,
     prev
   } = useCarousel({
-    totalItems: 12,
+    totalItems: popularArtists.length,
     itemsPerPage: 6
   });
 
@@ -41,7 +44,7 @@ export const ArtistsCarousel: React.FC<ArtistsCarouselProps> = ({
             className="flex gap-6 transition-transform duration-300 ease-out overflow-x-auto snap-x snap-mandatory scrollbar-hide"
             style={{ scrollBehavior: 'smooth' }}
           >
-            {Array.from({ length: 12 }).map((_, index) => (
+            {popularArtists.map((artist, index) => (
               <div 
                 key={`artist-${index}`} 
                 className="group flex-shrink-0 w-[calc(50%-0.75rem)] sm:w-[calc(33.333%-1rem)] md:w-[calc(25%-1.125rem)] lg:w-[calc(20%-1.2rem)] xl:w-[calc(16.666%-1.25rem)]"
@@ -50,14 +53,12 @@ export const ArtistsCarousel: React.FC<ArtistsCarouselProps> = ({
                   <div className="relative mb-3 overflow-hidden rounded-full aspect-square bg-gradient-to-br from-purple-600/20 to-blue-500/20 p-1">
                     <div className="relative w-full h-full rounded-full overflow-hidden">
                       <ImageWithFallback 
-                        src={`/demo/artist${index % 6 + 1}.jpg`}
-                        alt={`Artista ${index + 1}`}
-                        className="w-full h-full"
-                        gradientId={index * 10} // Multiplicamos para mayor variación
-                        isRounded={true}
+                        src={artist.imageUrl || `https://picsum.photos/seed/artist-${index}/500/500`}
+                        alt={artist.name}
+                        className="w-full h-full object-cover"
                         fallbackIcon={
-                          <div className="w-full h-full flex items-center justify-center">
-                            <FaMicrophone className="text-4xl text-white/90" />
+                          <div className="w-full h-full bg-gradient-to-br from-purple-600 to-blue-500 flex items-center justify-center">
+                            <FaMicrophone className="text-2xl text-white" />
                           </div>
                         }
                       />
@@ -68,8 +69,8 @@ export const ArtistsCarousel: React.FC<ArtistsCarouselProps> = ({
                       </div>
                     </div>
                   </div>
-                  <h3 className="font-bold text-white text-center truncate">Artista {index + 1}</h3>
-                  <p className="text-sm text-gray-400 text-center">Popular</p>
+                  <h3 className="font-bold text-white text-center truncate">{artist.name}</h3>
+                  <p className="text-sm text-gray-400 text-center truncate">{artist.genre}</p>
                 </div>
               </div>
             ))}

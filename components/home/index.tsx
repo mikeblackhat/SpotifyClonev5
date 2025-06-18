@@ -3,17 +3,54 @@ import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { FiMusic } from 'react-icons/fi';
 import { FaPlay } from 'react-icons/fa';
-import { ArtistsCarousel } from "./home/ArtistsCarousel";
-import { AlbumsCarousel } from "./home/AlbumsCarousel";
-import { PlaylistsCarousel } from "./home/PlaylistsCarousel";
-import { GenresCarousel } from "./home/GenresCarousel";
-import { useCarousel } from "@/hooks/useCarousel";
-import { ImageWithFallback } from "./ui/ImageWithFallback";
+import { ArtistsCarousel } from "../shared/carousels/ArtistsCarousel";
+import { AlbumsCarousel } from "../shared/carousels/AlbumsCarousel";
+import { PlaylistsCarousel } from "../shared/carousels/PlaylistsCarousel";
+import GenresCarousel from "../browse/Genres/Carousel";
+import useCarousel from "@/hooks/useCarousel";
+import { useSampleData } from "@/hooks/useSampleData";
+import { ImageWithFallback } from "../shared/ui/ImageWithFallback";
 import { FaMusic } from 'react-icons/fa';
 
 const HomeContent = () => {
   const { data: session, status } = useSession();
   const [isMounted, setIsMounted] = useState(false);
+  
+  // Obtener datos de muestra
+  const { popularSongs, popularArtists, popularAlbums, featuredPlaylists } = useSampleData();
+  
+  // Combinar datos para la sección de tendencias con tipos explícitos
+  type TrendingItem = {
+    id: string;
+    type: 'song' | 'artist' | 'album';
+    title: string;
+    subtitle: string;
+    imageUrl?: string;
+  };
+
+  const trendingItems: TrendingItem[] = [
+    ...popularSongs.slice(0, 2).map((song, i) => ({
+      id: song.id || `song-${i}-${Date.now()}`,
+      type: 'song' as const,
+      title: song.title,
+      subtitle: song.artist,
+      imageUrl: song.imageUrl
+    })),
+    ...popularArtists.slice(0, 2).map((artist, i) => ({
+      id: artist.id || `artist-${i}-${Date.now()}`,
+      type: 'artist' as const,
+      title: artist.name,
+      subtitle: artist.genre || 'Artista',
+      imageUrl: artist.imageUrl
+    })),
+    ...popularAlbums.slice(0, 2).map((album, i) => ({
+      id: album.id || `album-${i}-${Date.now()}`,
+      type: 'album' as const,
+      title: album.title,
+      subtitle: album.artist,
+      imageUrl: album.imageUrl
+    }))
+  ];
   
   // Configuración del carrusel de canciones
   const {
@@ -42,7 +79,7 @@ const HomeContent = () => {
       </div>
       <div className="flex-1">
         <p className="text-2xl font-semibold text-green-500 mb-4">
-          {isAuthenticated ? 'BIENVENIDO DE VUELTA' : 'BIENVENIDO A SPOTIFY'}
+          {isAuthenticated ? 'BIENVENIDO' : 'BIENVENIDO A SPOTIFY'}
         </p>
         <h1 
           className="font-bold mb-6"
@@ -90,7 +127,7 @@ const HomeContent = () => {
                   <div className="relative mb-4">
                     <div className="w-full aspect-square rounded-md shadow-lg mb-3 overflow-hidden group-hover:shadow-2xl transition-all duration-300">
                       <ImageWithFallback 
-                        src={`/demo/song${(n % 6) + 1}.jpg`}
+                        src={`https://picsum.photos/seed/song-${n}/400/400`}
                         alt={`Canción ${n}`}
                         className="w-full h-full"
                         gradientId={n * 40} // Multiplicamos para mayor variación
@@ -109,10 +146,10 @@ const HomeContent = () => {
                     </button>
                   </div>
                   <h3 className="font-bold text-white truncate">
-                    {status === 'authenticated' ? `Recomendación ${n}` : `Canción ${n}`}
+                    {status === 'authenticated' ? popularSongs[n % popularSongs.length].title : `Canción ${n}`}
                   </h3>
                   <p className="text-sm text-gray-400 truncate">
-                    {status === 'authenticated' ? 'Basado en tu historial' : `Artista ${n}`}
+                    {status === 'authenticated' ? popularSongs[n % popularSongs.length].artist : `Artista ${n}`}
                   </p>
                 </div>
               </div>
@@ -156,17 +193,16 @@ const HomeContent = () => {
         </button>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-        {[1,2,3,4,5,6].map((n) => (
-          <div key={n} className="group bg-neutral-800/50 hover:bg-neutral-700/70 rounded-md p-4 transition-all duration-300 hover:shadow-lg">
+        {trendingItems.map((item, index) => (
+          <div key={index} className="group bg-neutral-800/50 hover:bg-neutral-700/70 rounded-md p-4 transition-all duration-300 hover:shadow-lg">
             <div className="relative mb-4">
               <div className="w-full aspect-square rounded-md shadow-lg mb-3 overflow-hidden group-hover:shadow-2xl transition-all duration-300">
                 <ImageWithFallback 
-                  src={`/demo/hot${n % 4 + 1}.jpg`}
-                  alt={`Tendencia ${n}`}
-                  className="w-full h-full"
-                  gradientId={n * 50} // Multiplicamos para mayor variación
+                  src={item.imageUrl || `https://picsum.photos/seed/trending-${index}/400/400`}
+                  alt={item.title}
+                  className="w-full h-full object-cover"
                   fallbackIcon={
-                    <div className="w-full h-full flex items-center justify-center">
+                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-purple-600 to-blue-500">
                       <FaMusic className="text-4xl text-white/90" />
                     </div>
                   }
@@ -174,16 +210,16 @@ const HomeContent = () => {
               </div>
               <button 
                 className="absolute bottom-2 right-2 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 hover:scale-105"
-                onClick={() => console.log('Reproducir tendencia', n)}
+                onClick={() => console.log('Reproducir tendencia', index)}
               >
                 <FaPlay className="text-black ml-1" />
               </button>
             </div>
             <h3 className="font-bold text-white truncate">
-              {status === 'authenticated' ? `Recomendación ${n}` : `Hit ${n}`}
+              {item.title}
             </h3>
             <p className="text-sm text-gray-400 truncate">
-              {status === 'authenticated' ? 'Basado en tus gustos' : `Artista ${n}`}
+              {item.subtitle}
             </p>
           </div>
         ))}
@@ -201,7 +237,7 @@ const HomeContent = () => {
             </div>
             <div className="flex-1">
               <p className="text-xs font-semibold text-green-500 mb-1">
-                BIENVENIDO DE VUELTA
+                BIENVENIDO
               </p>
               <h1 className="text-4xl font-bold mb-1">
                 Hola, {session?.user?.name ? session.user.name.charAt(0).toUpperCase() + session.user.name.slice(1) : 'Usuario'}

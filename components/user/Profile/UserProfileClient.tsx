@@ -7,12 +7,12 @@ import { FaPlay, FaMicrophone } from 'react-icons/fa';
 import { BsGraphUp } from 'react-icons/bs';
 
 // Components
-import ProfileHeader from './profile/ProfileHeader';
-import PlaylistsSection from './profile/PlaylistsSection';
-import MixesSection from './profile/MixesSection';
+import ProfileHeader from './ProfileHeader';
+import PlaylistsSection from './PlaylistsSection';
+import MixesSection from './MixesSection';
 
 // Types
-import { TopTrack, UserData } from './profile/types';
+import { TopTrack, UserData } from './types';
 
 const UserProfileClient = () => {
   const router = useRouter();

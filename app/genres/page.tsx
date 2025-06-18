@@ -1,6 +1,5 @@
 import { Suspense } from 'react';
-import { GenresGrid } from '@/components/genres/GenresGrid';
-import { PageHeader } from '@/components/ui/PageHeader';
+import { GenresGrid, PageHeader } from '@/components';
 
 export default function GenresPage() {
   return (

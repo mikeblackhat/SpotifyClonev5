@@ -1,8 +1,10 @@
+'use client';
+
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { FaPlay, FaSpinner, FaMusic } from 'react-icons/fa';
-import { useCarousel } from '../../hooks/useCarousel';
-import { ImageWithFallback } from '../ui/ImageWithFallback';
+import useCarousel from '@/hooks/useCarousel';
+import { ImageWithFallback } from '@/components/shared/ui/ImageWithFallback';
 
 interface Genre {
   id: string;
@@ -15,7 +17,7 @@ interface GenresCarouselProps {
   showAllText?: string;
 }
 
-export const GenresCarousel: React.FC<GenresCarouselProps> = ({ 
+const GenresCarousel: React.FC<GenresCarouselProps> = ({ 
   title = 'Explorar géneros', 
   showAllText = 'Ver todo' 
 }) => {
@@ -205,3 +207,5 @@ export const GenresCarousel: React.FC<GenresCarouselProps> = ({
     </section>
   );
 };
+
+export default GenresCarousel;

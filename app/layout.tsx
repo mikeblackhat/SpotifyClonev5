@@ -7,12 +7,10 @@ import { usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { Providers } from './providers';
 import { memo } from 'react';
-import Sidebar from "@/components/Sidebar";
-import Topbar from "@/components/Topbar";
-import Rightbar from "@/components/Rightbar";
-import FooterPlayer from "@/components/FooterPlayer";
+import { Sidebar, Topbar, Rightbar, SignupBanner } from "@/components";
 import React, { useState, useEffect } from "react";
-import SignupBanner from "@/components/SignupBanner";
+import { PlayerProvider } from "@/contexts/PlayerContext";
+import PlayerBar from "@/components/player/PlayerBar";
 
 const font = Figtree({ subsets: ["latin"] });
 
@@ -42,39 +40,41 @@ const AuthenticatedLayout = memo(function AuthenticatedLayout({
   
   // Para páginas que requieren autenticación
   return (
-    <div className="flex flex-col min-h-0 min-w-0 h-full w-full overflow-hidden">
-      <div className="z-50 relative">
-        <Topbar />
-      </div>
-      <div className="flex flex-1 min-h-0 min-w-0 overflow-hidden relative">
-        <Sidebar />
-        <main 
-          className={`min-h-0 min-w-0 overflow-y-auto custom-scrollbar flex-1 px-1 md:px-2 pt-1 md:pt-1.5 pb-24 backdrop-blur-md bg-black/70 ${showRightbar ? 'md:mr-80' : ''}`}
-          style={{ 
-            width: showRightbar ? 'calc(100% - 320px)' : '100%',
-            paddingBottom: '6rem' // Asegura espacio para el footer
-          }}
-        >
-          <div className="min-h-[calc(100vh-10rem)]">
-            {children}
-          </div>
-        </main>
-        {isLoggedIn && showRightbar && (
-          <div 
-            className="fixed top-0 right-0 h-full w-80 bg-neutral-900/80 backdrop-blur-md z-40 overflow-y-auto"
-            style={{ paddingTop: '64px' }}
+    <PlayerProvider>
+      <div className="flex flex-col min-h-0 min-w-0 h-full w-full overflow-hidden">
+        <div className="z-50 relative">
+          <Topbar />
+        </div>
+        <div className="flex flex-1 min-h-0 min-w-0 overflow-hidden relative">
+          <Sidebar />
+          <main 
+            className={`min-h-0 min-w-0 overflow-y-auto custom-scrollbar flex-1 px-1 md:px-2 pt-1 md:pt-1.5 pb-24 backdrop-blur-md bg-black/70 ${showRightbar ? 'md:mr-80' : ''}`}
+            style={{ 
+              width: showRightbar ? 'calc(100% - 320px)' : '100%',
+              paddingBottom: '6rem' // Asegura espacio para el reproductor
+            }}
           >
-            <Rightbar />
-          </div>
-        )}
+            <div className="min-h-[calc(100vh-10rem)]">
+              {children}
+            </div>
+          </main>
+          {isLoggedIn && showRightbar && (
+            <div 
+              className="fixed top-0 right-0 h-full w-80 bg-neutral-900/80 backdrop-blur-md z-40 overflow-y-auto"
+              style={{ paddingTop: '64px' }}
+            >
+              <Rightbar />
+            </div>
+          )}
+        </div>
+        
+        {/* Barra de reproducción */}
+        <PlayerBar />
+        
+        {/* Banner de registro para usuarios no autenticados */}
+        {!isLoggedIn && <SignupBanner />}
       </div>
-      {isLoggedIn && (
-        <FooterPlayer 
-          showRightbar={showRightbar} 
-          setShowRightbar={setShowRightbar} 
-        />
-      )}
-    </div>
+    </PlayerProvider>
   );
 });
 

@@ -4,7 +4,7 @@ import { FiMusic } from 'react-icons/fi';
 import { FaPlay } from 'react-icons/fa';
 import { PlaylistsSectionProps } from './types';
 
-export default function PlaylistsSection({ user }: PlaylistsSectionProps) {
+function PlaylistsSection({ user }: PlaylistsSectionProps) {
   const playlists = [
     { id: 1, name: user.topPlaylist || 'Tus Mezclas', tracks: 42 },
     { id: 2, name: 'Éxitos del verano', tracks: 35 },
@@ -39,3 +39,5 @@ export default function PlaylistsSection({ user }: PlaylistsSectionProps) {
     </div>
   );
 }
+
+export default PlaylistsSection;

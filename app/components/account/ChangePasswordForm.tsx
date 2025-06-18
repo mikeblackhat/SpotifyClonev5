@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { FaLock, FaArrowLeft, FaCheckCircle, FaExclamationTriangle, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
-import { Modal } from '@/components/ui/Modal';
+import { Modal } from '@/components/shared/ui/Modal';
 
 export default function ChangePasswordForm() {
   const router = useRouter();

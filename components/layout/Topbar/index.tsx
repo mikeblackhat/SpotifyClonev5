@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { FiSearch, FiUser, FiHelpCircle, FiSettings } from "react-icons/fi";
 import { IoHomeOutline } from "react-icons/io5";
-import Notifications from "./Notifications";
+import Notifications from "@/components/user/Notifications";
 import { GrInstallOption } from "react-icons/gr";
 import { BsSpotify } from "react-icons/bs";
 import { IoMdClose } from "react-icons/io";

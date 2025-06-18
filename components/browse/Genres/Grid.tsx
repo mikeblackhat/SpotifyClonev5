@@ -20,7 +20,7 @@ interface Genre {
   image?: string | null;
 }
 
-export function GenresGrid() {
+function GenresGrid() {
   const router = useRouter();
   const [genres, setGenres] = useState<Genre[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -173,3 +173,5 @@ export function GenresGrid() {
     </div>
   );
 }
+
+export default GenresGrid;

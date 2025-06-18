@@ -255,7 +255,7 @@ const COUNTRIES = [
   { code: 'ZW', name: 'Zimbabue' },
 ].sort((a, b) => a.name.localeCompare(b.name)); // Ordenar alfabéticamente
 import { toast } from 'react-hot-toast';
-import { Modal } from '@/components/ui/Modal';
+import { Modal } from '@/components/shared/ui/Modal';
 
 interface UserProfile {
   _id: string;
