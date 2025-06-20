@@ -84,11 +84,12 @@ const UserProfileClient = () => {
 
       {/* Lista de canciones */}
       <div className="mb-8">
-        <div className="grid grid-cols-12 gap-4 text-gray-400 text-sm font-medium border-b border-gray-800 pb-2 mb-4 px-4">
+        {/* Encabezados - Ocultos en móviles */}
+        <div className="hidden md:grid grid-cols-12 gap-4 text-gray-400 text-sm font-medium border-b border-gray-800 pb-2 mb-4 px-4">
           <div className="col-span-1">#</div>
-          <div className="col-span-6">TÍTULO</div>
-          <div className="col-span-3">REPRODUCCIONES</div>
-          <div className="col-span-2 text-right">DURACIÓN</div>
+          <div className="col-span-6 lg:col-span-5 xl:col-span-6">TÍTULO</div>
+          <div className="col-span-3 lg:col-span-4 xl:col-span-3">REPRODUCCIONES</div>
+          <div className="col-span-2 lg:col-span-2 xl:col-span-2 text-right">DURACIÓN</div>
         </div>
         
         {[
@@ -98,42 +99,64 @@ const UserProfileClient = () => {
         ].map((track, index) => (
           <div 
             key={track.id}
-            className="grid grid-cols-12 gap-4 items-center py-3 px-4 rounded-md hover:bg-white/10 group cursor-pointer"
+            className="grid grid-cols-12 gap-2 md:gap-3 lg:gap-4 items-center py-2 md:py-2.5 px-2 md:px-4 rounded-md hover:bg-white/10 group cursor-pointer"
           >
-            <div className="col-span-1 text-gray-400 group-hover:hidden">{index + 1}</div>
-            <div className="col-span-1 hidden group-hover:block">
-              <button className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-black">
-                <FaPlay className="ml-0.5" />
+            {/* Número / Botón de reproducción */}
+            <div className="col-span-1 text-gray-400 group-hover:hidden text-xs md:text-sm text-center">
+              <span className="md:hidden">{index + 1}.</span>
+              <span className="hidden md:inline">{index + 1}</span>
+            </div>
+            <div className="col-span-1 hidden group-hover:flex items-center">
+              <button className="w-6 h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 bg-green-500 rounded-full flex items-center justify-center text-black hover:scale-105 transition-transform">
+                <FaPlay className="ml-0.5 text-xs md:text-sm" />
               </button>
             </div>
-            <div className="col-span-6">
-              <div className="font-medium text-white">{track.title}</div>
-              <div className="text-sm text-gray-400">{track.artist}</div>
+            
+            {/* Información de la canción */}
+            <div className="col-span-8 md:col-span-6 lg:col-span-5 xl:col-span-6 pl-1 md:pl-0">
+              <div className="font-medium text-white text-sm md:text-base truncate">{track.title}</div>
+              <div className="text-xs md:text-sm text-gray-400 truncate">{track.artist}</div>
             </div>
-            <div className="col-span-3 text-gray-400">{track.plays.toLocaleString()}</div>
-            <div className="col-span-2 text-right text-gray-400">{track.duration}</div>
+            
+            {/* Reproducciones */}
+            <div className="hidden md:block col-span-3 lg:col-span-4 xl:col-span-3 text-gray-400 text-sm">
+              {track.plays.toLocaleString()}
+            </div>
+            
+            {/* Duración y menú */}
+            <div className="col-span-3 md:col-span-2 lg:col-span-2 text-right flex items-center justify-end">
+              {/* Botón de menú en móviles */}
+              <button className="md:hidden text-gray-400 hover:text-white p-1">
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
+                </svg>
+              </button>
+              <span className="text-xs md:text-sm text-gray-400 ml-2 md:ml-0">
+                {track.duration}
+              </span>
+            </div>
           </div>
         ))}
       </div>
 
       {/* Sección de géneros principales */}
-      <div className="mb-10">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold">Tus géneros principales</h2>
-          <button className="text-sm text-gray-400 hover:text-white">Ver todo</button>
+      <div className="mb-8 md:mb-10">
+        <div className="flex items-center justify-between mb-4 md:mb-6 px-2 md:px-0">
+          <h2 className="text-xl md:text-2xl font-bold">Tus géneros principales</h2>
+          <button className="text-xs md:text-sm text-gray-400 hover:text-white">Ver todo</button>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4 px-2 md:px-0">
           {user.topGenres.map((genre, index) => (
             <div 
               key={index}
-              className="bg-gradient-to-br from-purple-600/20 to-blue-500/20 p-4 rounded-lg border border-white/10 hover:border-white/20 transition-colors cursor-pointer group"
+              className="bg-gradient-to-br from-purple-600/20 to-blue-500/20 p-3 md:p-4 rounded-lg border border-white/10 hover:border-white/20 transition-colors cursor-pointer group"
             >
-              <div className="flex items-center justify-between mb-2">
-                <FiMusic className="text-xl text-purple-400" />
-                <span className="text-xs text-gray-400">Género</span>
+              <div className="flex items-center justify-between mb-1 md:mb-2">
+                <FiMusic className="text-lg md:text-xl text-purple-400" />
+                <span className="text-[10px] md:text-xs text-gray-400">Género</span>
               </div>
-              <h3 className="font-bold text-lg">{genre}</h3>
-              <div className="flex items-center mt-2 text-xs text-gray-400">
+              <h3 className="font-bold text-base md:text-lg leading-tight md:leading-normal truncate">{genre}</h3>
+              <div className="flex items-center mt-1 md:mt-2 text-[10px] md:text-xs text-gray-400">
                 <FiMusic className="mr-1" />
                 <span>Populares</span>
               </div>
@@ -143,34 +166,34 @@ const UserProfileClient = () => {
       </div>
 
       {/* Sección de artistas destacados */}
-      <div className="mb-10">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold">Tus artistas destacados</h2>
-          <button className="text-sm text-gray-400 hover:text-white">Ver todo</button>
+      <div className="mb-8 md:mb-10">
+        <div className="flex items-center justify-between mb-4 md:mb-6 px-2 md:px-0">
+          <h2 className="text-xl md:text-2xl font-bold">Tus artistas destacados</h2>
+          <button className="text-xs md:text-sm text-gray-400 hover:text-white">Ver todo</button>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4 lg:gap-6 px-2 md:px-0">
           {user.topArtists.map((artist) => (
             <div 
               key={artist.id}
               className="group cursor-pointer"
             >
-              <div className="relative mb-3 overflow-hidden rounded-full aspect-square bg-gradient-to-br from-purple-600/20 to-blue-500/20 p-1">
+              <div className="relative mb-2 md:mb-3 overflow-hidden rounded-full aspect-square bg-gradient-to-br from-purple-600/20 to-blue-500/20 p-0.5 md:p-1">
                 <div className="relative w-full h-full rounded-full overflow-hidden">
                   <div className="w-full h-full bg-gradient-to-br from-purple-600 to-blue-500 flex items-center justify-center">
-                    <FaMicrophone className="text-4xl text-white/80" />
+                    <FaMicrophone className="text-2xl md:text-3xl lg:text-4xl text-white/80" />
                   </div>
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <button className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-black transform hover:scale-105">
-                      <FaPlay className="ml-1" />
+                    <button className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-green-500 flex items-center justify-center text-black transform hover:scale-105 transition-transform">
+                      <FaPlay className="ml-0.5 text-sm md:text-base" />
                     </button>
                   </div>
                 </div>
-                <div className="absolute bottom-0 right-2 bg-green-500 rounded-full w-5 h-5 flex items-center justify-center">
-                  <BsGraphUp className="text-xs text-black" />
+                <div className="absolute bottom-0 right-1 md:right-2 bg-green-500 rounded-full w-4 h-4 md:w-5 md:h-5 flex items-center justify-center">
+                  <BsGraphUp className="text-[8px] md:text-xs text-black" />
                 </div>
               </div>
-              <h3 className="font-bold text-white text-center">{artist.name}</h3>
-              <p className="text-sm text-gray-400 text-center">{artist.plays} reproducciones</p>
+              <h3 className="font-bold text-white text-center text-sm md:text-base truncate px-1">{artist.name}</h3>
+              <p className="text-xs md:text-sm text-gray-400 text-center">{artist.plays.toLocaleString()} rep.</p>
             </div>
           ))}
         </div>

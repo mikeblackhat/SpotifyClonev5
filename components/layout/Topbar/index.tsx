@@ -7,7 +7,6 @@ import { IoMdClose } from "react-icons/io";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { formatName } from "@/lib/utils";
 import { BsSpotify } from "react-icons/bs";
 import { GrInstallOption } from "react-icons/gr";
 
@@ -329,14 +328,6 @@ const Topbar = () => {
             </div>
           </div>
           
-          {/* Botón de búsqueda en móvil */}
-          <Link 
-            href="/search" 
-            className="sm:hidden flex items-center justify-center w-8 h-8 rounded-full bg-neutral-800 hover:bg-neutral-700 transition"
-            aria-label="Buscar"
-          >
-            <FiSearch size={18} className="text-white" />
-          </Link>
         </div>
       </div>
       {/* Botones y perfil */}
@@ -377,6 +368,7 @@ const Topbar = () => {
           <div className="flex items-center gap-3">
             {/* Contenido del lado derecho - Avatar y botones */}
             <div className="flex items-center gap-2">
+              
               {/* Vista móvil (sm) */}
               <div className="flex sm:hidden items-center gap-2">
                 <UserMenu />
