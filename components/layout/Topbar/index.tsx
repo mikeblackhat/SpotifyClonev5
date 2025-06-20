@@ -1,15 +1,44 @@
 'use client';
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, ReactNode } from "react";
 import { FiSearch, FiUser, FiHelpCircle, FiSettings } from "react-icons/fi";
 import { IoHomeOutline } from "react-icons/io5";
-import Notifications from "@/components/user/Notifications";
-import { GrInstallOption } from "react-icons/gr";
-import { BsSpotify } from "react-icons/bs";
 import { IoMdClose } from "react-icons/io";
-import { useSession, signIn, signOut } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import { signOut, useSession } from "next-auth/react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { formatName } from "@/lib/utils";
+import { BsSpotify } from "react-icons/bs";
+import { GrInstallOption } from "react-icons/gr";
+
+// Componente para los enlaces del menú móvil
+const MenuLink = ({ 
+  href, 
+  icon, 
+  title, 
+  subtitle, 
+  onClick 
+}: { 
+  href: string; 
+  icon: ReactNode; 
+  title: string; 
+  subtitle: string; 
+  onClick: () => void 
+}) => (
+  <Link 
+    href={href}
+    className="flex items-center gap-4 px-4 py-3 text-gray-200 hover:bg-neutral-800 hover:text-white transition-colors rounded-lg mx-1 group"
+    onClick={onClick}
+  >
+    <div className="w-10 h-10 rounded-full bg-neutral-700 flex items-center justify-center group-hover:bg-neutral-600 transition-colors">
+      {icon}
+    </div>
+    <div>
+      <p className="font-medium">{title}</p>
+      <p className="text-xs text-neutral-400">{subtitle}</p>
+    </div>
+  </Link>
+);
 
 // Componente de menú de usuario que muestra el avatar y el menú desplegable
 const UserMenu = () => {
@@ -61,31 +90,44 @@ const UserMenu = () => {
     return null;
   }
 
-  // Efecto para cerrar el menú al hacer clic fuera de él
+  // Efecto para cerrar el menú al hacer clic fuera de él o al hacer scroll
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
       // Si el clic fue fuera del menú, cerrarlo
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         setOpen(false);
       }
     };
-    // Agregar el event listener solo cuando el menú está abierto
-    if (open) document.addEventListener("mousedown", handleClickOutside);
-    // Limpiar el event listener al desmontar el componente
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+
+    // Cerrar menú al hacer scroll
+    const handleScroll = () => setOpen(false);
+
+    // Agregar los event listeners solo cuando el menú está abierto
+    if (open) {
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("touchstart", handleClickOutside);
+      window.addEventListener("scroll", handleScroll, true);
+    }
+
+    // Limpiar los event listeners al desmontar el componente
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+      window.removeEventListener("scroll", handleScroll, true);
+    };
   }, [open]);
 
   return (
-    // Contenedor relativo para posicionar el menú desplegable
+    // Contenedor relativo para posicionar el menú
     <div className="relative" ref={menuRef}>
       {/* Botón del avatar del usuario */}
       <button
-        className="flex items-center justify-center rounded-full overflow-hidden w-9 h-9 hover:opacity-90 transition-opacity"
-        onClick={() => setOpen((o) => !o)} // Alternar estado abierto/cerrado
+        className={`flex items-center justify-center rounded-full overflow-hidden w-9 h-9 hover:opacity-90 transition-all duration-200 ${open ? 'ring-2 ring-white' : ''}`}
+        onClick={() => setOpen((o) => !o)}
         aria-label="Abrir menú de usuario"
+        aria-expanded={open}
       >
         {session?.user?.image ? (
-          // Mostrar imagen de perfil si está disponible
           <img 
             src={session.user.image} 
             alt="Foto de perfil" 
@@ -93,65 +135,136 @@ const UserMenu = () => {
             referrerPolicy="no-referrer"
           />
         ) : (
-          // Mostrar inicial en un círculo de color si no hay imagen
           <div className="w-full h-full bg-gradient-to-br from-green-600 to-blue-600 flex items-center justify-center text-white font-bold text-sm">
             {getUserInitial()}
           </div>
         )}
       </button>
-      {/* Menú desplegable que se muestra al hacer clic en el avatar */}
-      {open && (
-        <div className="absolute right-0 mt-2 w-56 bg-neutral-900 border border-neutral-700 rounded-lg shadow-lg py-2 z-50 animate-fade-in flex flex-col">
-          {session?.user && (
-            /* Sección de información del usuario */
-            <div className="px-4 py-3 border-b border-neutral-700">
-              <p className="text-white font-medium text-sm">{formatName(session.user.name)}</p>
-              <p className="text-neutral-400 text-xs">{session.user.email || ''}</p>
+      
+      {/* Menú para móviles (sm) - Panel lateral */}
+      <div 
+        className={`lg:hidden fixed left-0 top-0 h-screen w-72 bg-neutral-900 border-r border-neutral-700 shadow-2xl z-50 transition-all duration-300 ease-in-out transform ${open ? 'translate-x-0' : '-translate-x-full'}`}
+      >
+        {/* Contenido del menú móvil */}
+        <div className="p-5 border-b border-neutral-700">
+          <div className="flex items-center gap-4">
+            <div className="w-14 h-14 rounded-full overflow-hidden bg-neutral-700 border-2 border-neutral-600">
+              {session?.user?.image ? (
+                <img 
+                  src={session.user.image} 
+                  alt="Foto de perfil" 
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+              ) : (
+                <div className="w-full h-full bg-gradient-to-br from-green-600 to-blue-600 flex items-center justify-center text-white font-bold text-xl">
+                  {getUserInitial()}
+                </div>
+              )}
             </div>
-          )}
+            <div>
+              <h2 className="text-white font-bold text-lg">{session?.user ? formatName(session.user.name) : 'Usuario'}</h2>
+              <p className="text-neutral-400 text-sm">{session?.user?.email || ''}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="p-3 overflow-y-auto h-[calc(100vh-100px)]">
           <Link 
             href="/profile" 
-            className="flex items-center gap-2 px-4 py-2 text-gray-200 hover:bg-neutral-800 hover:text-white transition-colors"
+            className="flex items-center gap-4 px-4 py-3 text-gray-200 hover:bg-neutral-800 hover:text-white transition-colors rounded-lg mx-1 group"
             onClick={() => setOpen(false)}
           >
-            <span className="text-lg"><FiUser /></span>
-            <span>Perfil</span>
+            <div className="w-10 h-10 rounded-full bg-neutral-700 flex items-center justify-center group-hover:bg-neutral-600 transition-colors">
+              <FiUser className="text-lg" />
+            </div>
+            <div>
+              <p className="font-medium">Perfil</p>
+              <p className="text-xs text-neutral-400">Tu información personal</p>
+            </div>
           </Link>
           
           <Link 
             href="/account" 
-            className="flex items-center gap-2 px-4 py-2 text-gray-200 hover:bg-neutral-800 hover:text-white transition-colors"
+            className="flex items-center gap-4 px-4 py-3 text-gray-200 hover:bg-neutral-800 hover:text-white transition-colors rounded-lg mx-1 mt-1 group"
             onClick={() => setOpen(false)}
           >
-            <span className="text-lg"><FiUser /></span>
-            <span>Cuenta</span>
+            <div className="w-10 h-10 rounded-full bg-neutral-700 flex items-center justify-center group-hover:bg-neutral-600 transition-colors">
+              <FiSettings className="text-lg" />
+            </div>
+            <div>
+              <p className="font-medium">Cuenta</p>
+              <p className="text-xs text-neutral-400">Configuración y privacidad</p>
+            </div>
           </Link>
           
           <Link 
             href="/help" 
-            className="flex items-center gap-2 px-4 py-2 text-gray-200 hover:bg-neutral-800 hover:text-white transition-colors"
+            className="flex items-center gap-4 px-4 py-3 text-gray-200 hover:bg-neutral-800 hover:text-white transition-colors rounded-lg mx-1 mt-1 group"
             onClick={() => setOpen(false)}
           >
-            <span className="text-lg"><FiHelpCircle /></span>
-            <span>Ayuda</span>
+            <div className="w-10 h-10 rounded-full bg-neutral-700 flex items-center justify-center group-hover:bg-neutral-600 transition-colors">
+              <FiHelpCircle className="text-lg" />
+            </div>
+            <div>
+              <p className="font-medium">Ayuda</p>
+              <p className="text-xs text-neutral-400">Soporte y preguntas frecuentes</p>
+            </div>
           </Link>
           
-          <Link 
-            href="/settings" 
-            className="px-4 py-2 text-left text-sm text-white hover:bg-neutral-800 transition-colors"
-            onClick={() => setOpen(false)}
-          >
-            Configuración
-          </Link>
-          <div className="border-t border-neutral-700 my-1"></div>
-          <button 
+          <div className="border-t border-neutral-800 my-3 mx-3"></div>
+          
+          <button
             onClick={handleSignOut}
-            className="px-4 py-2 text-left text-sm text-white hover:bg-neutral-800 transition-colors"
+            className="w-full text-left px-4 py-3 text-gray-200 hover:bg-neutral-800 hover:text-white transition-colors rounded-lg mx-1 flex items-center gap-4 group"
           >
-            Cerrar sesión
+            <div className="w-10 h-10 rounded-full bg-neutral-700 flex items-center justify-center group-hover:bg-neutral-600 transition-colors">
+              <IoMdClose className="text-lg" />
+            </div>
+            <span className="font-medium">Cerrar sesión</span>
           </button>
         </div>
-      )}
+      </div>
+
+      {/* Menú para escritorio (lg) - Modal */}
+      <div 
+        className={`hidden lg:block fixed right-0 top-16 w-64 bg-neutral-900 border border-neutral-700 rounded-lg shadow-xl z-50 transition-all duration-200 transform origin-top-right ${open ? 'scale-100 opacity-100' : 'scale-95 opacity-0 pointer-events-none'}`}
+      >
+        {session?.user && (
+          <div className="p-4 border-b border-neutral-700">
+            <p className="text-white font-medium text-sm">{formatName(session.user.name)}</p>
+            <p className="text-neutral-400 text-xs">{session.user.email || ''}</p>
+          </div>
+        )}
+        <Link 
+          href="/profile" 
+          className="block px-4 py-2 text-sm text-gray-200 hover:bg-neutral-800 hover:text-white transition-colors"
+          onClick={() => setOpen(false)}
+        >
+          <FiUser className="inline mr-2" /> Perfil
+        </Link>
+        <Link 
+          href="/account" 
+          className="block px-4 py-2 text-sm text-gray-200 hover:bg-neutral-800 hover:text-white transition-colors"
+          onClick={() => setOpen(false)}
+        >
+          <FiSettings className="inline mr-2" /> Cuenta
+        </Link>
+        <Link 
+          href="/help" 
+          className="block px-4 py-2 text-sm text-gray-200 hover:bg-neutral-800 hover:text-white transition-colors"
+          onClick={() => setOpen(false)}
+        >
+          <FiHelpCircle className="inline mr-2" /> Ayuda
+        </Link>
+        <div className="border-t border-neutral-700 my-1"></div>
+        <button
+          onClick={handleSignOut}
+          className="w-full text-left px-4 py-2 text-sm text-gray-200 hover:bg-neutral-800 hover:text-white transition-colors"
+        >
+          <IoMdClose className="inline mr-2" /> Cerrar sesión
+        </button>
+      </div>
     </div>
   );
 };
@@ -190,12 +303,13 @@ const Topbar = () => {
   };
   return (
     <header className="w-full h-16 px-4 sm:px-6 flex items-center justify-between bg-gradient-to-b from-neutral-950/90 to-transparent sticky top-0 z-30 backdrop-blur-md">
+      {/* Contenido del lado izquierdo - Logo en desktop */}
       {/* Logo Spotify */}
-      <div className="flex items-center gap-4 sm:gap-8">
+      <div className="hidden md:flex items-center gap-4 lg:gap-8">
         <BsSpotify className="text-white text-2xl flex-shrink-0" />
       </div>
       {/* Buscador centrado */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg px-2 sm:px-0">
+      <div className="hidden md:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg px-2 lg:px-0">
         <div className="flex items-center gap-2 w-full">
           <Link 
             href="/" 
@@ -251,9 +365,43 @@ const Topbar = () => {
             </Link>
           </div>
         ) : (
-          <div className="flex items-center gap-1 sm:gap-2">
-            <Notifications />
-            <UserMenu />
+          <div className="flex items-center gap-3">
+            {/* Contenido del lado derecho - Avatar y botones */}
+            <div className="flex items-center gap-2">
+              {/* Vista móvil (sm) */}
+              <div className="flex sm:hidden items-center gap-2">
+                <UserMenu />
+                <button 
+                  className="bg-black/30 text-white font-medium text-sm px-3 py-1.5 rounded-full border border-white/20 hover:bg-white/10 hover:scale-105 transition-all duration-200 active:scale-95"
+                  onClick={() => router.push('/browse')}
+                >
+                  Música
+                </button>
+                <button 
+                  className="bg-black/30 text-white font-medium text-sm px-3 py-1.5 rounded-full border border-white/20 hover:bg-white/10 hover:scale-105 transition-all duration-200 active:scale-95"
+                  onClick={() => router.push('/podcasts')}
+                >
+                  Podcasts
+                </button>
+                <button 
+                  className="bg-black/30 text-white font-medium text-sm px-3 py-1.5 rounded-full border border-white/20 hover:bg-white/10 hover:scale-105 transition-all duration-200 active:scale-95"
+                  onClick={() => router.push('/playlists')}
+                >
+                  Listas
+                </button>
+                <button 
+                  className="bg-black/30 text-white font-medium text-sm px-3 py-1.5 rounded-full border border-white/20 hover:bg-white/10 hover:scale-105 transition-all duration-200 active:scale-95"
+                  onClick={() => router.push('/genres')}
+                >
+                  Géneros
+                </button>
+              </div>
+              
+              {/* Vista tablet/escritorio (sm+) */}
+              <div className="hidden sm:flex items-center gap-2">
+                <UserMenu />
+              </div>
+            </div>
           </div>
         )}
       </div>

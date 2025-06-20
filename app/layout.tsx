@@ -8,6 +8,7 @@ import { useSession } from 'next-auth/react';
 import { Providers } from './providers';
 import { memo } from 'react';
 import { Sidebar, Topbar, Rightbar, SignupBanner } from "@/components";
+import MobileBottomNav from "@/components/layout/MobileBottomNav";
 import React, { useState, useEffect } from "react";
 import { PlayerProvider } from "@/contexts/PlayerContext";
 import PlayerBar from "@/components/player/PlayerBar";
@@ -45,13 +46,22 @@ const AuthenticatedLayout = memo(function AuthenticatedLayout({
         <div className="z-50 relative">
           <Topbar />
         </div>
+        {/* Contenedor principal que cambia de fila a columna en móviles */}
         <div className="flex flex-1 min-h-0 min-w-0 overflow-hidden relative">
-          <Sidebar />
+          {/* Sidebar solo visible en md y superiores */}
+          <div className="hidden md:flex h-full">
+            <Sidebar />
+          </div>
+          
+          {/* Contenido principal */}
           <main 
-            className={`min-h-0 min-w-0 overflow-y-auto custom-scrollbar flex-1 px-1 md:px-2 pt-1 md:pt-1.5 pb-24 backdrop-blur-md bg-black/70 ${showRightbar ? 'md:mr-80' : ''}`}
+            className={`min-h-0 min-w-0 overflow-y-auto custom-scrollbar flex-1 px-1 md:px-2 pt-1 md:pt-1.5 pb-32 sm:pb-24 backdrop-blur-md bg-black/70 ${
+              showRightbar ? 'lg:mr-64 xl:mr-80' : ''
+            }`}
             style={{ 
-              width: showRightbar ? 'calc(100% - 320px)' : '100%',
-              paddingBottom: '6rem' // Asegura espacio para el reproductor
+              width: '100%',
+              maxWidth: '100%',
+              paddingBottom: '8rem' // Más espacio para el reproductor en móviles
             }}
           >
             <div className="min-h-[calc(100vh-10rem)]">
@@ -60,19 +70,23 @@ const AuthenticatedLayout = memo(function AuthenticatedLayout({
           </main>
           {isLoggedIn && showRightbar && (
             <div 
-              className="fixed top-0 right-0 h-full w-80 bg-neutral-900/80 backdrop-blur-md z-40 overflow-y-auto"
-              style={{ paddingTop: '64px' }}
+              className="hidden lg:flex fixed top-0 right-0 h-full w-64 lg:w-72 xl:w-80 bg-neutral-900/80 backdrop-blur-md z-40 overflow-y-auto transform transition-all duration-300 ease-in-out"
+              style={{ 
+                paddingTop: '64px',
+                boxShadow: '-4px 0 10px rgba(0, 0, 0, 0.3)'
+              }}
             >
               <Rightbar />
             </div>
           )}
         </div>
         
-        {/* Barra de reproducción */}
-        <PlayerBar />
-        
-        {/* Banner de registro para usuarios no autenticados */}
-        {!isLoggedIn && <SignupBanner />}
+        {/* Contenedor fijo en la parte inferior */}
+        <div className="fixed bottom-16 left-0 right-0 z-40 sm:bottom-0 sm:pb-0">
+          <PlayerBar />
+          {!isLoggedIn && <SignupBanner />}
+        </div>
+        <MobileBottomNav />
       </div>
     </PlayerProvider>
   );
@@ -94,7 +108,6 @@ export default function RootLayout({
           <AuthenticatedLayout>
             {children}
           </AuthenticatedLayout>
-          <SignupBanner />
         </Providers>
       </body>
     </html>

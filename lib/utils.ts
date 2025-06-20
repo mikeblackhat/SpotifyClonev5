@@ -46,6 +46,18 @@ export const generateId = (prefix: string = ''): string => {
  * @param num Número a formatear
  * @returns String formateado
  */
+/**
+ * Formatea un nombre para mostrar solo el primer nombre y la primera letra del apellido
+ * @param name Nombre completo
+ * @returns Nombre formateado (ej: "Juan P.")
+ */
+export const formatName = (name: string): string => {
+  if (!name) return 'Usuario';
+  const names = name.split(' ');
+  if (names.length === 1) return name;
+  return `${names[0]} ${names[1] ? names[1][0] + '.' : ''}`.trim();
+};
+
 export const formatNumber = (num: number): string => {
   if (num >= 1000000) {
     return `${(num / 1000000).toFixed(1)}M`;

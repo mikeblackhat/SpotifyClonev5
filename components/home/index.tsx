@@ -230,24 +230,7 @@ const HomeContent = () => {
   return (
     <div className="w-full min-h-screen p-6 pb-16 overflow-x-hidden bg-gradient-to-b from-neutral-900 to-black text-white">
       <div className="flex flex-col gap-8">
-        {status === 'authenticated' && (
-          <div className="flex items-end gap-4 mb-6">
-            <div className="w-32 h-32 bg-gradient-to-br from-purple-600 to-blue-500 rounded-md shadow-lg flex items-center justify-center">
-              <FiMusic className="text-5xl text-white/80" />
-            </div>
-            <div className="flex-1">
-              <p className="text-xs font-semibold text-green-500 mb-1">
-                BIENVENIDO
-              </p>
-              <h1 className="text-4xl font-bold mb-1">
-                Hola, {session?.user?.name ? session.user.name.charAt(0).toUpperCase() + session.user.name.slice(1) : 'Usuario'}
-              </h1>
-              <p className="text-gray-400 text-sm">
-                Esto es lo que está sonando ahora mismo
-              </p>
-            </div>
-          </div>
-        )}
+
         
         {renderSongsCarousel()}
         
