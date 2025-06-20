@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useRef, useEffect, ReactNode } from 'react';
 import { Song } from '@/types/media';
+import { sampleSongs } from '@/src/data/sample/songs';
 
 interface PlayerContextType {
   currentSong: Song | null;
@@ -25,7 +26,17 @@ interface PlayerProviderProps {
 }
 
 export const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
-  const [currentSong, setCurrentSong] = useState<Song | null>(null);
+  // Canción de ejemplo para mostrar el reproductor
+  const exampleSong: Song = {
+    ...sampleSongs[0],
+    id: 'example-1',
+    duration: 213, // 3:33 minutos en segundos
+    imageUrl: 'https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228',
+    audioUrl: 'https://example.com/audio.mp3',
+    playCount: 0
+  };
+
+  const [currentSong, setCurrentSong] = useState<Song | null>(exampleSong);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [volume, setVolumeState] = useState<number>(0.7);
   const [duration, setDuration] = useState<number>(0);
