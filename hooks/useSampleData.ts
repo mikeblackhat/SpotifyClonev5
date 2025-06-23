@@ -1,5 +1,5 @@
 import { Song, Artist, Album, Playlist } from '@/types/media';
-import { sampleSongs, sampleArtists, sampleAlbums, samplePlaylists } from '@/data/sample';
+import { sampleSongs, sampleArtists, sampleAlbums, samplePlaylists } from '@/lib/data/sample'; // Updated path
 import { useState, useEffect } from 'react';
 
 // Función para generar un ID único basado en un prefijo y un índice

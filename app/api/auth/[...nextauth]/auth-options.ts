@@ -2,7 +2,7 @@ import { MongoDBAdapter } from '@auth/mongodb-adapter';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
-import clientPromise from '@/lib/mongodb';
+import clientPromise from '@/config/lib/mongodb'; // Updated path
 import bcrypt from 'bcryptjs';
 import type { Adapter } from 'next-auth/adapters';
 

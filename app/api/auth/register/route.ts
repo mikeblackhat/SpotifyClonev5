@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import clientPromise from '@/lib/mongodb';
+import clientPromise from '@/config/lib/mongodb'; // Updated path
 import bcrypt from 'bcryptjs';
 
 // Tipos para TypeScript

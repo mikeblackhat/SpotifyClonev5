@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useRef, useEffect, ReactNode } from 'react';
 import { Song } from '@/types/media';
-import { sampleSongs } from '@/src/data/sample/songs';
+import { sampleSongs } from '@/lib/data/sample/songs'; // Moved from src/data/sample/songs
 
 interface PlayerContextType {
   currentSong: Song | null;

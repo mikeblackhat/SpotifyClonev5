@@ -1,4 +1,4 @@
-import { AuthConfig } from "../auth.config";
+import { AuthConfig } from "../config/auth.config";
 import { DefaultSession, DefaultUser } from "next-auth";
 
 declare global {

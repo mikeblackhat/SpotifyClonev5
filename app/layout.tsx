@@ -82,11 +82,16 @@ const AuthenticatedLayout = memo(function AuthenticatedLayout({
         </div>
         
         {/* Contenedor fijo en la parte inferior */}
-        <div className="fixed bottom-16 left-0 right-0 z-40 sm:bottom-0 sm:pb-0">
-          <PlayerBar />
-          {!isLoggedIn && <SignupBanner />}
-        </div>
-        <MobileBottomNav />
+        {isLoggedIn ? (
+          <div className="fixed bottom-16 left-0 right-0 z-40 sm:bottom-0 sm:pb-0">
+            <PlayerBar />
+          </div>
+        ) : (
+          <div className="fixed bottom-0 left-0 right-0 z-40">
+            <SignupBanner />
+          </div>
+        )}
+        {isLoggedIn && <MobileBottomNav />}
       </div>
     </PlayerProvider>
   );

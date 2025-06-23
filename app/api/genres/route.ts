@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import clientPromise from '@/lib/mongodb';
+import clientPromise from '@/config/lib/mongodb'; // Updated path
 
 // Interfaz para el documento de género en MongoDB
 interface GenreDocument {
@@ -13,8 +13,17 @@ interface GenreDocument {
 
 // Función auxiliar para obtener la base de datos
 async function getDb() {
-  const client = await clientPromise;
-  return client.db();
+  try {
+    console.log('Conectando a MongoDB...');
+    const client = await clientPromise;
+    console.log('Conexión a MongoDB establecida correctamente');
+    const db = client.db();
+    console.log('Base de datos obtenida:', db.databaseName);
+    return db;
+  } catch (error) {
+    console.error('Error al conectar a MongoDB:', error);
+    throw error;
+  }
 }
 
 // Cachear la respuesta por 1 hora
@@ -36,9 +45,23 @@ export async function GET() {
     console.log('Obteniendo géneros desde la base de datos...');
     
     const db = await getDb();
+    console.log('Obteniendo colección de géneros...');
     const genresCollection = db.collection<GenreDocument>('genres');
     
+    // Verificar si la colección existe
+    const collections = await db.listCollections({ name: 'genres' }).toArray();
+    console.log('Colecciones encontradas:', collections);
+    
+    if (collections.length === 0) {
+      console.warn('La colección "genres" no existe en la base de datos');
+      return NextResponse.json({
+        success: true,
+        data: { genres: [] }
+      });
+    }
+    
     // Obtener todos los géneros ordenados por nombre
+    console.log('Buscando géneros...');
     const genres = await genresCollection
       .find({}, { 
         projection: { 
@@ -49,6 +72,8 @@ export async function GET() {
       })
       .sort({ name: 1 })
       .toArray();
+      
+    console.log(`Géneros encontrados:`, genres);
     
     console.log(`Total de géneros encontrados: ${genres.length}`);
     

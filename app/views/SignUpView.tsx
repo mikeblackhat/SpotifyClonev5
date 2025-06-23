@@ -1,129 +1,110 @@
 'use client';
 
-import { signIn } from 'next-auth/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { FaSpotify, FaGoogle, FaFacebook, FaApple, FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaSpotify, FaGoogle, FaFacebook, FaApple, FaEnvelope, FaLock, FaEye, FaEyeSlash, FaCheckCircle } from 'react-icons/fa';
 import Link from 'next/link';
+import { Modal } from '@/components/shared/ui/Modal';
+import { useAuth } from '@/hooks/auth/useAuth';
+import { validateSignUpForm, generateUsernameFromEmail, SignUpFormData } from '@/utils/validations/authValidations';
+
+// Los tipos ahora se importan desde authValidations
 
 export default function SignUpView() {
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSocialLoading, setIsSocialLoading] = useState<string | null>(null);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [displayName, setDisplayName] = useState('');
+  const [formData, setFormData] = useState<SignUpFormData>({
+    email: '',
+    password: '',
+    displayName: ''
+  });
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  
+  const {
+    isLoading,
+    isSocialLoading,
+    error,
+    handleRegister,
+    handleSocialSignIn,
+    setError
+  } = useAuth({
+    onSuccess: () => {
+      // Redirigir directamente a la página principal
+      router.push('/');
+    },
+    onRegisterSuccess: () => {
+      // Redirigir al inicio de sesión si es necesario
+      router.push('/auth/signin');
+    },
+    onError: (errorMsg) => {
+      setError(errorMsg);
+    }
+  });
+
+  const { email, password, displayName } = formData;
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+  
+  // Efecto para manejar la transición de carga
+  useEffect(() => {
+    if (isLoading) {
+      setIsTransitioning(true);
+      const timer = setTimeout(() => {
+        setIsTransitioning(false);
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [isLoading]);
+
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validaciones básicas
-    if (!email || !password || !displayName) {
-      setError('Por favor completa todos los campos');
-      return;
-    }
+    // Validar el formulario
+    const { isValid, errors } = validateSignUpForm({
+      email,
+      password,
+      displayName
+    });
 
-    // Validar formato de correo electrónico
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setError('Por favor ingresa un correo electrónico válido');
-      return;
-    }
-
-    // Validar contraseña (mínimo 8 caracteres, al menos una letra y un número)
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-    if (!passwordRegex.test(password)) {
-      setError('La contraseña debe tener al menos 8 caracteres, incluyendo una letra y un número');
-      return;
-    }
-
-    // Validar nombre de usuario
-    if (displayName.trim().length < 3) {
-      setError('El nombre debe tener al menos 3 caracteres');
-      return;
-    }
-
-    // Generar un nombre de usuario a partir del correo electrónico
-    const username = email.split('@')[0].toLowerCase().replace(/[^a-z0-9]/g, '');
+    setFormErrors(errors);
     
-    setIsLoading(true);
-    setError(null);
-
-    try {
-      // 1. Registrar al usuario en la base de datos
-      const registerResponse = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: email.trim(),
-          password: password,
-          username: username,
-          name: displayName.trim()
-        }),
-      });
-
-      const registerData = await registerResponse.json();
-
-      if (!registerResponse.ok) {
-        throw new Error(registerData.message || 'Error al registrar el usuario');
+    if (!isValid) {
+      // Mostrar el primer error encontrado
+      const firstError = Object.values(errors)[0];
+      if (firstError) {
+        setError(firstError);
       }
-      
-      // 2. Iniciar sesión automáticamente después del registro exitoso
-      const signInResult = await signIn('credentials', {
-        redirect: false,
-        email: email.trim(),
-        password: password,
-      });
+      return;
+    }
 
-      if (signInResult?.error) {
-        // Si hay un error al iniciar sesión, redirigir a la página de inicio de sesión
-        // con un mensaje de éxito en el registro
-        router.push('/auth/signin?registered=true');
-        return;
-      }
-      
-      // 3. Redirigir a la página de inicio después de iniciar sesión exitosamente
-      if (signInResult?.url) {
-        router.push(signInResult.url);
-      } else {
-        // Si no hay URL de redirección, redirigir a la página de inicio
-        router.push('/');
-      }
-      
-    } catch (error: any) {
-      console.error('Error en el registro:', error);
-      
-      // Manejar diferentes tipos de errores
-      if (error.message.includes('E11000')) {
-        if (error.message.includes('email')) {
-          setError('Ya existe una cuenta con este correo electrónico');
-        } else if (error.message.includes('username')) {
-          setError('El nombre de usuario ya está en uso');
-        } else {
-          setError('El usuario ya existe');
-        }
-      } else {
-        setError(error.message || 'Ocurrió un error al registrarte. Por favor, inténtalo de nuevo.');
-      }
-    } finally {
-      setIsLoading(false);
+    // Generar nombre de usuario y limpiar errores previos
+    const username = generateUsernameFromEmail(email);
+    setFormErrors({});
+    
+    // Llamar al manejador de registro
+    const result = await handleRegister({
+      email: email.trim(),
+      password,
+      username,
+      name: displayName.trim()
+    });
+    
+    // Si hay un error en el registro, mostrarlo
+    if (result?.error) {
+      setError(result.error);
     }
   };
 
-  const handleSocialLogin = async (provider: string) => {
-    setIsSocialLoading(provider);
-    try {
-      await signIn(provider, { callbackUrl: '/' });
-    } catch (error) {
-      console.error('Error al iniciar sesión con ' + provider, error);
-      setError(`Error al iniciar sesión con ${provider}`);
-      setIsSocialLoading(null);
-    }
+  const handleSocialLogin = (provider: string) => {
+    handleSocialSignIn(provider);
   };
 
   const socialButtons = [
@@ -152,8 +133,6 @@ export default function SignUpView() {
       color: 'bg-black hover:bg-neutral-800 text-white',
     }
   ];
-
-  // Efecto de carga suave
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -221,12 +200,18 @@ export default function SignUpView() {
                 <input
                   type="text"
                   id="displayName"
+                  name="displayName"
                   value={displayName}
-                  onChange={(e) => setDisplayName(e.target.value)}
-                  className="w-full bg-neutral-900 border border-neutral-700 rounded px-4 py-3 text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                  placeholder="Introduce un nombre de perfil"
-                  disabled={isLoading}
+                  onChange={handleChange}
+                  className={`w-full p-3 rounded-md bg-gray-900 border ${
+                    formErrors.displayName ? 'border-red-500' : 'border-gray-700'
+                  } text-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent`}
+                  placeholder="¿Cómo quieres que te llamemos?"
+                  required
                 />
+                {formErrors.displayName && (
+                  <p className="mt-1 text-sm text-red-500">{formErrors.displayName}</p>
+                )}
               </div>
               <p className="mt-1 text-xs text-neutral-400">
                 Esto aparece en tu perfil.
@@ -244,12 +229,18 @@ export default function SignUpView() {
                 <input
                   type="email"
                   id="email"
+                  name="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-neutral-900 border border-neutral-700 rounded pl-10 pr-4 py-3 text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                  placeholder="Introduce tu correo electrónico"
-                  disabled={isLoading}
+                  onChange={handleChange}
+                  className={`w-full pl-10 pr-4 py-3 rounded-md bg-gray-900 border ${
+                    formErrors.email ? 'border-red-500' : 'border-gray-700'
+                  } text-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent`}
+                  placeholder="Correo electrónico"
+                  required
                 />
+                {formErrors.email && (
+                  <p className="mt-1 text-sm text-red-500">{formErrors.email}</p>
+                )}
               </div>
             </div>
 
@@ -261,15 +252,32 @@ export default function SignUpView() {
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <FaLock className="text-gray-400" />
                 </div>
-                <input
-                  type={showPassword ? "text" : "password"}
-                  id="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-neutral-900 border border-neutral-700 rounded pl-10 pr-10 py-3 text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                  placeholder="Crea una contraseña"
-                  disabled={isLoading}
-                />
+                <div className="w-full">
+                  <div className="flex">
+                    <input
+                      type={showPassword ? 'text' : 'password'}
+                      id="password"
+                      name="password"
+                      value={password}
+                      onChange={handleChange}
+                      className={`w-full pl-10 pr-12 py-3 rounded-md bg-gray-900 border ${
+                        formErrors.password ? 'border-red-500' : 'border-gray-700'
+                      } text-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent`}
+                      placeholder="Contraseña"
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-white focus:outline-none"
+                    >
+                      {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    </button>
+                  </div>
+                  {formErrors.password && (
+                    <p className="mt-1 text-sm text-red-500">{formErrors.password}</p>
+                  )}
+                </div>
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}

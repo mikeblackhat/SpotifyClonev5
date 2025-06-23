@@ -113,103 +113,66 @@ const Sidebar: React.FC = () => {
     const isAuthenticated = status === 'authenticated';
 
     if (!isAuthenticated) {
-        // Sidebar minimalista para usuarios no autenticados
+        // Sidebar para usuarios no autenticados - siempre expandido sin efectos
         return (
-            <motion.aside 
-        className="hidden sm:flex flex-col bg-black/60 backdrop-blur-xl border-r border-white/10 shadow-2xl select-none overflow-hidden flex-shrink-0 pt-1"
-        initial={{ width: 72 }}
-        animate={{ 
-            width: 72, // Default mobile width
-            transition: { 
-                type: 'spring', 
-                stiffness: 300,
-                damping: 30,
-                delay: 0.1
-            } 
-        }}
-        whileHover={{ 
-            width: 280, // Expanded width on hover
-            transition: { 
-                type: 'spring', 
-                stiffness: 300,
-                damping: 30
-            } 
-        }}
-    >
-        <motion.div 
-            className="flex flex-col h-full p-2 lg:p-4 pb-20 overflow-y-auto custom-scrollbar"
-            initial={{ opacity: 0 }}
-            animate={{ 
-                opacity: 1,
-                transition: { delay: 0.2 }
-            }}
-        >
-            {/* Título y botón + */}
-            <motion.div 
-                className="flex items-center justify-between mb-4"
-                layout
-                transition={{
-                    type: 'spring',
-                    stiffness: 300,
-                    damping: 30
-                }}
-            >
-                <h3 className="text-lg font-bold text-white hidden lg:block">Tu biblioteca</h3>
-                <button className="p-1 rounded-full hover:bg-white/10 text-gray-400 hover:text-white transition-colors" aria-label="Crear playlist" title="Crear playlist">
-                    <BiPlus className="text-lg" />
-                </button>
-            </motion.div>
-            
-            {/* Tarjeta: Crea tu primera playlist */}
-            <div className="bg-[#181818] rounded-lg p-4 mb-4">
-                <h4 className="text-white font-bold mb-1">Crea tu primera playlist</h4>
-                <p className="text-gray-400 text-sm mb-3">¡Es muy fácil! Te vamos a ayudar</p>
-                <button className="bg-white text-black font-bold rounded-full px-4 py-2 text-sm hover:scale-105 transition-transform">
-                    Crear playlist
-                </button>
-            </div>
-            
-            {/* Tarjeta: Busquemos podcasts */}
-            <div className="bg-[#181818] rounded-lg p-4 mb-4">
-                <h4 className="text-white font-bold mb-1">Busquemos algunos podcasts para seguir</h4>
-                <p className="text-gray-400 text-sm mb-3">Te mantendremos al tanto de los nuevos episodios.</p>
-                <button className="bg-white text-black font-bold rounded-full px-4 py-2 text-sm hover:scale-105 transition-transform">
-                    Explorar podcasts
-                </button>
-            </div>
-            
-            {/* Footer legal y selector de idioma */}
-            <div className="mt-auto pt-4">
-                <div className="text-xs text-gray-400 flex flex-wrap gap-x-4 gap-y-1 mb-4">
-                    <span>Legal</span>
-                    <span>Seguridad y Centro de Privacidad</span>
-                    <span>Política de Privacidad</span>
-                    <span>Cookies</span>
-                    <span>Sobre los anuncios</span>
-                    <span>Accesibilidad</span>
+            <aside className="hidden sm:flex flex-col bg-black/60 backdrop-blur-xl border-r border-white/10 shadow-2xl select-none overflow-hidden flex-shrink-0 pt-1 w-[240px] md:w-[280px]">
+                <div className="flex flex-col h-full p-2 lg:p-4 pb-20 overflow-y-auto custom-scrollbar">
+                    <div className="flex items-center justify-between mb-4">
+                        <h3 className="text-lg font-bold text-white">Tu biblioteca</h3>
+                        <button className="p-1 rounded-full hover:bg-white/10 text-gray-400 hover:text-white transition-colors" aria-label="Crear playlist" title="Crear playlist">
+                            <BiPlus className="text-lg" />
+                        </button>
+                    </div>
+                    
+                    <div className="bg-[#181818] rounded-lg p-4 mb-4">
+                        <h4 className="text-white font-bold mb-1">Crea tu primera playlist</h4>
+                        <p className="text-gray-400 text-sm mb-3">¡Es muy fácil! Te vamos a ayudar</p>
+                        <button className="bg-white text-black font-bold rounded-full px-4 py-2 text-sm hover:scale-105 transition-transform">
+                            Crear playlist
+                        </button>
+                    </div>
+                    
+                    <div className="bg-[#181818] rounded-lg p-4 mb-4">
+                        <h4 className="text-white font-bold mb-1">Busquemos algunos podcasts para seguir</h4>
+                        <p className="text-gray-400 text-sm mb-3">Te mantendremos al tanto de los nuevos episodios.</p>
+                        <button className="bg-white text-black font-bold rounded-full px-4 py-2 text-sm hover:scale-105 transition-transform">
+                            Explorar podcasts
+                        </button>
+                    </div>
+                    
+                    <div className="mt-auto pt-4">
+                        <div className="text-xs text-gray-400 flex flex-wrap gap-x-4 gap-y-1 mb-4">
+                            <span>Legal</span>
+                            <span>Seguridad y Centro de Privacidad</span>
+                            <span>Política de Privacidad</span>
+                            <span>Cookies</span>
+                            <span>Sobre los anuncios</span>
+                            <span>Accesibilidad</span>
+                        </div>
+                        <button className="flex items-center gap-2 border border-gray-400 rounded-full px-4 py-2 text-white text-sm hover:bg-white/10 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25M12 18.75V21M4.219 4.219l1.591 1.591M18.19 18.189l1.59 1.591M21 12h-2.25M5.25 12H3M4.219 19.781l1.591-1.591M18.189 5.811l1.591-1.591" />
+                            </svg>
+                            <span>Español de Latinoamérica</span>
+                        </button>
+                    </div>
                 </div>
-                <button className="flex items-center gap-2 border border-gray-400 rounded-full px-4 py-2 text-white text-sm hover:bg-white/10 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25M12 18.75V21M4.219 4.219l1.591 1.591M18.19 18.189l1.59 1.591M21 12h-2.25M5.25 12H3M4.219 19.781l1.591-1.591M18.189 5.811l1.591-1.591" />
-                    </svg>
-                    <span>Español de Latinoamérica</span>
-                </button>
-            </div>
-        </motion.div>
-    </motion.aside>
+            </aside>
         );
     }
 
     const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
     const [isLargeScreen, setIsLargeScreen] = useState<boolean>(false);
+    const [isHovered, setIsHovered] = useState<boolean>(false);
 
     useEffect(() => {
         const checkScreenSize = () => {
-            setIsLargeScreen(window.innerWidth >= 1024); // lg breakpoint
-            if (window.innerWidth >= 1024) {
-                setIsCollapsed(false);
-            } else {
-                setIsCollapsed(true);
+            const largeScreen = window.innerWidth >= 1024; // lg breakpoint
+            setIsLargeScreen(largeScreen);
+            
+            // Si está autenticado, manejar el colapso según el tamaño de pantalla
+            if (isAuthenticated) {
+                setIsCollapsed(!largeScreen);
             }
         };
 
@@ -219,7 +182,7 @@ const Sidebar: React.FC = () => {
         
         // Cleanup
         return () => window.removeEventListener('resize', checkScreenSize);
-    }, []);
+    }, [isAuthenticated]); // Añadir isAuthenticated a las dependencias
     const [activeTab, setActiveTab] = useState<string>('playlists');
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [playlists, setPlaylists] = useState<Playlist[]>([

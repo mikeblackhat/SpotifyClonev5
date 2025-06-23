@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, ReactNode } from "react";
 import { FiSearch, FiUser, FiHelpCircle, FiSettings } from "react-icons/fi";
 import { IoHomeOutline } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
+import { RiPlayListFill } from "react-icons/ri";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -302,23 +303,42 @@ const Topbar = () => {
     }
   };
   return (
-    <header className="w-full h-16 px-4 sm:px-6 flex items-center justify-between bg-gradient-to-b from-neutral-950/90 to-transparent sticky top-0 z-30 backdrop-blur-md">
-      {/* Contenido del lado izquierdo - Logo en desktop */}
-      {/* Logo Spotify */}
-      <div className="hidden md:flex items-center gap-4 lg:gap-8">
-        <BsSpotify className="text-white text-2xl flex-shrink-0" />
+    <header className="w-full h-16 px-3 sm:px-4 md:px-6 flex items-center justify-between bg-gradient-to-b from-neutral-950/90 to-transparent sticky top-0 z-30 backdrop-blur-md">
+      {/* Logo y navegación móvil */}
+      <div className="flex items-center gap-2 sm:gap-4">
+        {/* Logo en móvil */}
+        <Link href="/" className="md:hidden flex items-center justify-center w-8 h-8">
+          <BsSpotify className="text-white text-2xl" />
+        </Link>
+        
+        {/* Botón de búsqueda en móvil */}
+        <button 
+          className="md:hidden p-2 text-gray-400 hover:text-white"
+          onClick={() => router.push('/search')}
+          aria-label="Buscar"
+        >
+          <FiSearch size={20} />
+        </button>
+        
+        {/* Logo en desktop */}
+        <div className="hidden md:flex items-center gap-4 lg:gap-6">
+          <Link href="/" className="flex-shrink-0">
+            <BsSpotify className="text-white text-2xl" />
+          </Link>
+        </div>
       </div>
-      {/* Buscador centrado */}
-      <div className="hidden md:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg px-2 lg:px-0">
+      
+      {/* Buscador - Visible solo en tablet/desktop */}
+      <div className="hidden md:block flex-1 max-w-2xl mx-4 lg:mx-8">
         <div className="flex items-center gap-2 w-full">
           <Link 
             href="/" 
             className="flex-shrink-0 flex items-center justify-center w-9 h-9 rounded-full bg-neutral-800 hover:bg-neutral-700 transition"
             aria-label="Inicio"
           >
-            <IoHomeOutline size={20} className="text-white" />
+            <IoHomeOutline size={18} className="text-white" />
           </Link>
-          <div className="flex items-center bg-neutral-900 rounded-full px-3 py-2 flex-1 min-w-0">
+          <div className="flex items-center bg-neutral-900 rounded-full px-4 py-2.5 flex-1 min-w-0 hover:bg-neutral-800 transition-colors">
             <span className="text-gray-400">
               <FiSearch size={16} />
             </span>
@@ -331,76 +351,67 @@ const Topbar = () => {
           </div>
         </div>
       </div>
-      {/* Botones y perfil */}
-      <div className="flex items-center gap-1 sm:gap-2 relative">
-        <Link 
-          href="/premium" 
-          className="hidden sm:inline-flex bg-white text-black px-3 sm:px-5 py-2 rounded-full font-bold text-xs sm:text-sm hover:bg-neutral-200 transition transform hover:scale-105 items-center justify-center whitespace-nowrap"
-        >
-          <span className="hidden sm:inline">Explorar Premium</span>
-          <span className="sm:hidden">Premium</span>
-        </Link>
-        <button 
-          onClick={handleInstallApp}
-          className="hidden sm:flex bg-neutral-800 text-white p-2 sm:px-3 sm:py-2 rounded-full font-semibold text-sm hover:bg-neutral-700 transition items-center gap-1 sm:gap-2 transform hover:scale-105"
-          aria-label="Instalar aplicación"
-        >
-          <GrInstallOption className="text-sm sm:text-base" />
-          <span className="hidden sm:inline">Instalar</span>
-        </button>
-        
+      
+      {/* Botones de acción y perfil */}
+      <div className="flex items-center gap-2 sm:gap-3">
         {!isLoading && !session ? (
-          <div className="flex items-center gap-1 sm:gap-2">
+          // Usuario no autenticado
+          <div className="flex items-center gap-2">
             <Link 
               href="/auth/signup"
-              className="text-white font-bold px-2 sm:px-4 py-2 rounded-full text-xs sm:text-sm hover:bg-neutral-200 hover:text-black transition transform hover:scale-105 inline-flex items-center justify-center whitespace-nowrap"
+              className="text-white font-medium px-3 py-1.5 text-sm hover:scale-105 transition whitespace-nowrap"
             >
               Regístrate
             </Link>
             <Link 
               href="/auth/signin"
-              className="bg-white text-black px-3 sm:px-5 py-2 rounded-full font-bold text-xs sm:text-sm hover:bg-neutral-200 transition transform hover:scale-105 inline-flex items-center justify-center whitespace-nowrap"
+              className="bg-white text-black px-4 py-2 rounded-full font-bold text-sm hover:bg-neutral-200 transition whitespace-nowrap"
             >
-              Entrar
+              Iniciar sesión
             </Link>
           </div>
         ) : (
-          <div className="flex items-center gap-3">
-            {/* Contenido del lado derecho - Avatar y botones */}
-            <div className="flex items-center gap-2">
-              {/* Vista móvil (sm) */}
-              <div className="flex sm:hidden items-center gap-2">
-                <UserMenu />
-                <button 
-                  className="bg-black/30 text-white font-medium text-sm px-3 py-1.5 rounded-full border border-white/20 hover:bg-white/10 hover:scale-105 transition-all duration-200 active:scale-95"
-                  onClick={() => router.push('/browse')}
-                >
-                  Música
-                </button>
-                <button 
-                  className="bg-black/30 text-white font-medium text-sm px-3 py-1.5 rounded-full border border-white/20 hover:bg-white/10 hover:scale-105 transition-all duration-200 active:scale-95"
-                  onClick={() => router.push('/podcasts')}
-                >
-                  Podcasts
-                </button>
-                <button 
-                  className="bg-black/30 text-white font-medium text-sm px-3 py-1.5 rounded-full border border-white/20 hover:bg-white/10 hover:scale-105 transition-all duration-200 active:scale-95"
-                  onClick={() => router.push('/playlists')}
-                >
-                  Listas
-                </button>
-                <button 
-                  className="bg-black/30 text-white font-medium text-sm px-3 py-1.5 rounded-full border border-white/20 hover:bg-white/10 hover:scale-105 transition-all duration-200 active:scale-95"
-                  onClick={() => router.push('/genres')}
-                >
-                  Géneros
-                </button>
-              </div>
-              
-              {/* Vista tablet/escritorio (sm+) */}
-              <div className="hidden sm:flex items-center gap-2">
-                <UserMenu />
-              </div>
+          // Usuario autenticado
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Solo mostrar en tablet/desktop */}
+            <div className="hidden md:flex items-center gap-2">
+              <Link 
+                href="/premium" 
+                className="bg-white text-black px-4 py-2 rounded-full font-bold text-sm hover:bg-neutral-200 transition whitespace-nowrap"
+              >
+                Explorar Premium
+              </Link>
+              <button 
+                onClick={handleInstallApp}
+                className="bg-neutral-800 text-white p-2 rounded-full hover:bg-neutral-700 transition"
+                aria-label="Instalar aplicación"
+                title="Instalar aplicación"
+              >
+                <GrInstallOption size={18} />
+              </button>
+            </div>
+            
+            {/* Menú de usuario */}
+            <div className="flex items-center">
+              <UserMenu />
+            </div>
+            
+            {/* Menú de navegación móvil */}
+            <div className="md:hidden flex items-center gap-1.5 ml-1">
+              <button 
+                className="text-gray-400 hover:text-white p-1.5"
+                onClick={() => router.push('/browse')}
+                aria-label="Explorar"
+              >
+                <FiSearch size={20} />
+              </button>
+              <button 
+                className="text-gray-400 hover:text-white p-1.5"
+                onClick={() => router.push('/library')}
+                aria-label="Tu biblioteca"
+              >
+                <RiPlayListFill size={20} />
+              </button>
             </div>
           </div>
         )}

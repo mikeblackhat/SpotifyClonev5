@@ -36,7 +36,7 @@ declare module 'next-auth' {
   }
 }
 
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   // Configure authentication providers
   providers: [
     GoogleProvider({
@@ -235,4 +235,7 @@ export const authOptions: NextAuthOptions = {
   }
 };
 
-export default NextAuth(authOptions);
+const handler = NextAuth(authOptions);
+
+export { handler as GET, handler as POST, authOptions };
+

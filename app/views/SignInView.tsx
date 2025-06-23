@@ -1,53 +1,35 @@
 'use client';
 
-import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 import { FaSpotify, FaGoogle, FaFacebook, FaApple } from 'react-icons/fa';
 import Link from 'next/link';
+import { useAuth } from '@/hooks/auth/useAuth';
 
 export default function SignInView() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSocialLoading, setIsSocialLoading] = useState<string | null>(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState<string | null>(null);
+  
+  const {
+    isLoading,
+    isSocialLoading,
+    error,
+    handleSignIn,
+    handleSocialSignIn,
+    setError
+  } = useAuth({
+    onSuccess: () => {
+      // Redirigir al dashboard o página principal después del inicio de sesión exitoso
+      window.location.href = '/';
+    }
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !password) {
-      setError('Por favor ingresa tu correo y contraseña');
-      return;
-    }
-
-    setIsLoading(true);
-    setError(null);
-
-    try {
-      const result = await signIn('credentials', {
-        redirect: false,
-        email,
-        password,
-      });
-
-      if (result?.error) {
-        setError('Credenciales inválidas. Por favor, inténtalo de nuevo.');
-      }
-    } catch (error) {
-      setError('Ocurrió un error al iniciar sesión. Por favor, inténtalo de nuevo.');
-    } finally {
-      setIsLoading(false);
-    }
+    await handleSignIn(email, password);
   };
 
-  const handleSocialLogin = async (provider: string) => {
-    setIsSocialLoading(provider);
-    try {
-      await signIn(provider, { callbackUrl: '/' });
-    } catch (error) {
-      console.error('Error al iniciar sesión con ' + provider, error);
-      setError(`Error al iniciar sesión con ${provider}`);
-      setIsSocialLoading(null);
-    }
+  const handleSocialLogin = (provider: string) => {
+    handleSocialSignIn(provider);
   };
 
   const socialButtons = [
