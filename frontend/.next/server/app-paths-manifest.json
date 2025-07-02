@@ -1,0 +1,12 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/(site)/page": "app/(site)/page.js",
+  "/genres/[genreId]/page": "app/genres/[genreId]/page.js",
+  "/account/page": "app/account/page.js",
+  "/artist/[artistId]/page": "app/artist/[artistId]/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
+  "/api/genres/route": "app/api/genres/route.js",
+  "/api/artists/route": "app/api/artists/route.js",
+  "/help/page": "app/help/page.js"
+}

@@ -1,56 +1,5 @@
 {
-  "name": "spotify-clone",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
   "dependencies": {
-    "@auth/mongodb-adapter": "^2.6.0",
-    "@headlessui/react": "^2.2.4",
-    "@heroicons/react": "^2.2.0",
-    "@next-auth/mongodb-adapter": "^1.1.3",
-    "@radix-ui/react-slot": "^1.2.3",
-    "@types/bcrypt": "^5.0.2",
-    "@types/bcryptjs": "^2.4.6",
-    "@types/mongodb": "^4.0.6",
-    "@types/mongoose": "^5.11.96",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "bcrypt": "^6.0.0",
-    "bcryptjs": "^3.0.2",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "dotenv": "^16.5.0",
-    "framer-motion": "^12.12.1",
-    "lucide-react": "^0.511.0",
-    "mongodb": "^6.16.0",
-    "mongoose": "^8.15.0",
-    "next": "14.2.3",
-    "next-auth": "^4.24.11",
-    "react": "^18.2.0",
-    "react-country-flag": "^3.1.0",
-    "react-dom": "^18.2.0",
-    "react-hot-toast": "^2.5.2",
-    "react-icons": "^5.5.0",
-    "tailwind-merge": "^3.3.0"
-  },
-  "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@tailwindcss/postcss": "^4",
-    "@tailwindcss/typography": "^0.5.16",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "autoprefixer": "^10.4.21",
-    "eslint": "^9",
-    "eslint-config-next": "15.3.2",
-    "postcss": "^8.5.3",
-    "tailwindcss": "^4.1.7",
-    "typescript": "^5"
+    "axios": "^1.10.0"
   }
 }
